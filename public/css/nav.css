@@ -1,0 +1,401 @@
+/* =========================================
+   1. Base Navbar Styles (Desktop First)
+   ========================================= */
+.navbar-brand-text {
+    line-height: 1.1;
+    color: #000;
+    font-family: sans-serif;
+    margin-left: 10px;
+}
+
+.nav-link {
+    font-weight: 700;
+    color: #000 !important;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #198754 !important;
+    /* Bootstrap success green */
+}
+
+.navbar.sticky-top {
+    z-index: 1050;
+}
+
+/* =========================================
+   NAVBAR SCROLL EFFECT
+   ========================================= */
+
+/* 1. Initial Transparent State (Over Dark Image) */
+.transparent-nav {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Make text white when transparent */
+.transparent-nav .nav-link,
+.transparent-nav .brand-text-sm,
+.transparent-nav .brand-text-md,
+.transparent-nav .brand-text-lg {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    /* Helps visibility on busy backgrounds */
+}
+
+/* Make hamburger icon white when transparent */
+.transparent-nav .custom-toggler .icon-bar {
+    background-color: #ffffff;
+}
+
+/* 2. Scrolled Solid State (White Background) */
+.scrolled-nav {
+    background-color: #13bd82 !important;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Make text black when scrolled */
+.scrolled-nav .nav-link,
+.scrolled-nav .brand-text-sm,
+.scrolled-nav .brand-text-md,
+.scrolled-nav .brand-text-lg {
+    color: #ffffff !important;
+    text-shadow: none;
+}
+
+/* Hover effect when the navbar is transparent (Top of page) */
+.transparent-nav .nav-link:hover {
+    color: #198754 !important;
+    /* Standard Bootstrap green */
+}
+
+/* Hover effect when the navbar is green (Scrolled down) */
+.scrolled-nav .nav-link:hover {
+    color: #212529 !important;
+    /* A sharp dark charcoal/black so it pops against the green background */
+    /* Alternatively, you can use a light silver like #e9ecef if you want a soft fade instead! */
+}
+
+/* Make hamburger icon black when scrolled */
+.scrolled-nav .custom-toggler .icon-bar {
+    background-color: #ffffff;
+}
+
+/* Search form aesthetics */
+.transparent-nav .form-control {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+}
+
+.scrolled-nav .form-control {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+}
+
+/* =========================================
+   EXPANDABLE SEARCH BAR (Icon to Input)
+   ========================================= */
+
+.expandable-search-form {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 40px; /* Initial width: Just enough for the icon */
+    height: 40px;
+    border-radius: 50px;
+    transition: width 0.4s ease, background-color 0.4s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Expand the bar when hovered, or when the user clicks/types inside it */
+.search-container:hover,
+.search-container:focus-within {
+    width: 240px;
+    cursor: text;
+}
+
+.search-input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 0 5px 0 20px;
+    opacity: 0;
+    width: 0;
+    transition: opacity 0.4s ease, width 0.4s ease;
+}
+
+/* Show the text input when the container is expanded */
+.search-container:hover .search-input,
+.search-container:focus-within .search-input {
+    opacity: 1;
+    width: 100%;
+}
+
+.search-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* =========================================
+   SEARCH BAR COLOR ADAPTATION
+   ========================================= */
+
+/* 1. At the very top (Transparent Nav) */
+.transparent-nav .search-btn {
+    color: #ffffff;
+}
+.transparent-nav .search-container:hover,
+.transparent-nav .search-container:focus-within {
+    /* Glassmorphism effect when expanded over the photo */
+    background-color: rgba(255, 255, 255, 0.2); 
+}
+.transparent-nav .search-input {
+    color: #ffffff;
+}
+.transparent-nav .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 2. When scrolled down (White Nav) */
+.scrolled-nav .search-btn {
+    color: #ffffff;
+}
+.scrolled-nav .search-container:hover,
+.scrolled-nav .search-container:focus-within {
+    /* Light grey background when expanded over white nav */
+    background-color: #f1f3f5; 
+}
+.scrolled-nav .search-input {
+    color: #000000;
+}
+.scrolled-nav .search-input::placeholder {
+    color: #6c757d;
+}
+
+/* Mobile Tweak: Keep it full width inside the mobile menu */
+@media (max-width: 991.98px) {
+    .search-container {
+        width: 100%;
+        background-color: #f1f3f5;
+        cursor: text;
+    }
+    .search-input {
+        opacity: 1;
+        width: 100%;
+        color: #000000;
+    }
+    .search-btn {
+        color: #000000;
+    }
+}
+
+/* =========================================
+   EXPANDABLE SEARCH BAR (Icon to Input)
+   ========================================= */
+
+.expandable-search-form {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-container {
+    position: relative;
+    /* Crucial for pinning the button */
+    display: flex;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    transition: width 0.4s ease, background-color 0.4s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.search-container:hover,
+.search-container:focus-within {
+    width: 240px;
+    cursor: text;
+}
+
+.search-input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    /* Increased right padding to 40px so text doesn't type under the button */
+    padding: 0 40px 0 20px;
+    opacity: 0;
+    width: 0;
+    transition: opacity 0.4s ease, width 0.4s ease;
+}
+
+.search-container:hover .search-input,
+.search-container:focus-within .search-input {
+    opacity: 1;
+    width: 100%;
+}
+
+.search-btn {
+    position: absolute;
+    /* Pins the icon perfectly in place */
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+
+
+/* Base Logo and Text Sizes */
+.navbar-logo {
+    width: 60px;
+    height: 60px;
+}
+
+.brand-text-sm {
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+}
+
+.brand-text-md {
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+}
+
+.brand-text-lg {
+    font-size: 1.1rem;
+}
+
+/* =========================================
+   2. Custom Animated Hamburger Menu
+   ========================================= */
+.custom-toggler {
+    border: none;
+    background: transparent !important;
+    padding: 5px;
+}
+
+.custom-toggler:focus {
+    box-shadow: none;
+}
+
+.custom-toggler .icon-bar {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background-color: #000;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+}
+
+/* Transform to 'X' when menu is open (collapsed class is removed) */
+.custom-toggler:not(.collapsed) .top-bar {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.custom-toggler:not(.collapsed) .middle-bar {
+    opacity: 0;
+}
+
+.custom-toggler:not(.collapsed) .bottom-bar {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* =========================================
+   3. Responsive Adjustments (@media Queries)
+   ========================================= */
+
+/* Tablets and smaller (< 992px) */
+@media (max-width: 991.98px) {
+    .navbar-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .brand-text-sm,
+    .brand-text-md {
+        font-size: 0.7rem;
+    }
+
+    .brand-text-lg {
+        font-size: 0.95rem;
+    }
+
+    /* Enhance the mobile dropdown background */
+    #navbarContent {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Tap-friendly mobile links */
+    .nav-link {
+        padding: 10px 0 !important;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .nav-link:last-of-type {
+        border-bottom: none;
+    }
+}
+
+/* Mobile phones (< 576px) */
+@media (max-width: 575.98px) {
+    .navbar-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .brand-text-sm,
+    .brand-text-md {
+        font-size: 0.6rem;
+    }
+
+    .brand-text-lg {
+        font-size: 0.8rem;
+    }
+
+    /* Stack the search form */
+    .custom-search-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .custom-search-form .form-control {
+        margin-right: 0 !important;
+    }
+
+    .custom-search-form .btn {
+        width: 100%;
+    }
+}

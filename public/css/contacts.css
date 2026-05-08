@@ -1,0 +1,86 @@
+/* CONTACT ITEM WRAPPER */
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    transition: transform 0.2s ease;
+}
+
+.contact-item:hover {
+    transform: scale(1.02);
+}
+
+/* THE CIRCLE (Social Icon) */
+.contact-icon {
+    width: 100px;
+    height: 100px;
+    background-color: #dcdcdc;
+    /* Light gray from mockup */
+    /* Bright green border */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    /* Icon size */
+    color: #555;
+    z-index: 2;
+    /* Keeps circle on top of the rectangle */
+    position: relative;
+    flex-shrink: 0;
+    /* Prevents circle from squishing on small screens */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* THE RECTANGLE (Link Box) */
+.contact-text-box {
+    background-color: #dcdcdc;
+    border-left: none;
+    /* Remove left border so it flows into the circle */
+    border-radius: 0 20px 20px 0;
+    /* Rounded on the right side only */
+    padding: 15px 20px 15px 40px;
+    /* Extra left padding so text clears the circle */
+    margin-left: -25px;
+    /* Pulls the box UNDER the circle */
+    z-index: 1;
+    /* Sits behind the circle */
+    flex-grow: 1;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-text-box a {
+    color: #333;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    word-break: break-all;
+    /* Ensures long links don't break the box on mobile */
+}
+
+.contact-text-box a:hover {
+    color: #009900;
+    text-decoration: underline;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 767.98px) {
+    .contact-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+
+    .contact-text-box {
+        padding: 10px 15px 10px 30px;
+        margin-left: -20px;
+        min-height: 50px;
+    }
+
+    .contact-text-box a {
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,331 @@
+@extends('adminlayout.adminpanellayout')
+@section('adminpanel-content')
+
+    <div class="container-fluid px-2 px-md-4 py-3 py-md-5 min-vh-100 ordinance-typography">
+        <div class="row justify-content-center">
+            <div class="col-12">
+
+                {{-- Back Button --}}
+                <div class="mb-3 mb-md-4 text-start">
+                    <a href="{{ route('ord-uploaded') }}" class="btn btn-outline-dark shadow-sm px-3 px-md-4 fw-bold"
+                        data-uid="true">
+                        <i class="fa-solid fa-arrow-left me-2"></i> Back
+                    </a>
+                </div>
+
+                {{-- Main Document Card --}}
+                <div class="ordinance-document mb-4 mb-md-5 p-3 p-md-5 shadow-soft rounded bg-white">
+
+                    {{-- Admin Action Buttons (Edit/Delete) --}}
+                    <div class="position-relative d-flex flex-wrap gap-2 mb-3 p-2" style="z-index: 10;">
+                        <a href="{{ route('ord-edit', $ordinance->id) }}" class="btn btn-sm btn-primary shadow-sm"
+                            data-uid="true">
+                            Edit
+                        </a>
+
+                        <form action="{{ route('ord-delete', $ordinance->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger shadow-sm"
+                                onclick="return confirm('Are you sure you want to delete this ordinance?')">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="ordinance-content">
+
+                        {{-- Header: Logo & Committee Text --}}
+                        <div class="container-fluid d-flex align-items-center justify-content-center mb-5 px-3">
+
+                            {{-- The Left Logo (Bayan ng Mabini) --}}
+                            {{-- Added flex-shrink-0 so the flexbox never squishes it --}}
+                            <img src="{{ asset('/images/logo.png') }}" alt="Bayan ng Mabini Logo" class="img-fluid me-3 me-md-5 shrink-0"
+                                style="width: 140px; height: 140px; object-fit: contain;">
+
+                            {{-- The Text Block --}}
+                            <div class="d-flex flex-column text-center committee-header">
+                                <span>COMMITTEE ON JUSTICE HUMAN RIGHTS,</span>
+                                <span>LAWS AND ORDINANCES</span>
+                            </div>
+
+                            {{-- The Right Logo (Sangguniang Bayan) --}}
+                            {{-- 1. Added flex-shrink-0 --}}
+                            {{-- 2. Added transform: scale(1.2) to zoom past the invisible transparent padding in the file! --}}
+                            <img src="{{ asset('/images/sb.png') }}" alt="Sangguniang Bayan Logo" class="img-fluid ms-3 ms-md-5 shrink-0"
+                                style="width: 140px; height: 140px; object-fit: contain; transform: scale(1.11);">
+
+                        </div>
+
+                        {{-- DATE IMPLEMENTED --}}
+                        <div class="text-end mb-3 mb-md-5 fw-bold text-uppercase"
+                            style="font-size: clamp(0.9rem, 3vw, 1.1rem); letter-spacing: 1px;">
+                            {{ $ordinance->date_implemented ? \Carbon\Carbon::parse($ordinance->date_implemented)->format('F d, Y') : 'DATE NOT SPECIFIED' }}
+                        </div>
+
+                        {{-- SUBJECT --}}
+                        @if(!empty($ordinance->subject))
+                            <div class="mb-4">
+                                <h5 class="fw-bold text-uppercase mb-2">SUBJECT:</h5>
+                                <p class="ordinance-title text-uppercase ps-md-5 mb-0">
+                                    {!! nl2br(e($ordinance->subject)) !!}
+                                </p>
+                            </div>
+                        @endif
+
+                        {{-- LEGAL BASIS --}}
+                        @if(!empty($ordinance->legal_basis))
+                            <div class="mb-4">
+                                <h5 class="fw-bold text-uppercase mb-2">LEGAL BASIS:</h5>
+                                <p class="ordinance-body text-uppercase ps-md-5 mb-0">
+                                    {!! nl2br(e($ordinance->legal_basis)) !!}
+                                </p>
+                            </div>
+                        @endif
+
+                        {{-- FINDINGS AND RECOMMENDATION --}}
+                        @if(!empty($ordinance->findings))
+                            <div class="mb-5">
+                                <h5 class="fw-bold text-uppercase mb-2">Findings and Recommendation :</h5>
+                                <p class="ordinance-body text-uppercase mb-0">
+                                    {!! nl2br(e($ordinance->findings)) !!}
+                                </p>
+                            </div>
+                        @endif
+
+                        {{-- DRAFTED BY --}}
+                        @if(!empty($ordinance->drafted_by))
+                            <div class="mb-4">
+                                <h5 class="fw-bold mb-2 text-uppercase" style="font-size: 1.1rem;">Draft Resolution by
+                                    {{ $ordinance->drafted_by }}
+                                </h5>
+                            </div>
+                        @endif
+
+                        {{-- MAIN ORDINANCE DESCRIPTION --}}
+                        @if(!empty($ordinance->description))
+                            <div class="ordinance-body mb-5">
+                                <p class="mb-0 text-uppercase">
+                                    {!! nl2br(e($ordinance->description)) !!}
+                                </p>
+                            </div>
+                        @endif
+
+                        {{-- SECTIONS --}}
+                        @if(!empty($ordinance->sections) && is_array($ordinance->sections))
+                            <div class="ordinance-sections mb-5">
+                                @foreach($ordinance->sections as $index => $section)
+                                    @if(!empty($section['title']) || !empty($section['description']))
+                                        <div class="mb-4">
+                                            <h6 class="fw-bold text-uppercase mb-2" style="font-size: 1.1rem;">
+                                                SECTION {{ $index }}. {{ $section['title'] ?? '' }}
+                                            </h6>
+                                            <p class="ordinance-body text-uppercase mb-0">
+                                                {!! nl2br(e($section['description'] ?? '')) !!}
+                                            </p>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        @endif
+
+                        {{-- SIGNATURES BLOCK --}}
+                        @if(!empty($ordinance->signed_by) && is_array($ordinance->signed_by))
+                            <div class="mt-3 mt-md-5 pt-3 pt-md-5">
+
+                                {{-- Top Row: Chairman and Vice-Chairman --}}
+                                <div class="row g-2 g-md-4 text-center justify-content-between mb-3 mb-md-5">
+                                    @foreach($ordinance->signed_by as $index => $member)
+                                        @if(!empty($member) && $index < 2)
+                                            <div class="col-12 col-sm-6 col-md-5">
+                                                <div class="mt-2 mt-md-4">
+                                                    <h6 class="fw-bold text-uppercase mb-0 signature-name"
+                                                        style="font-size: clamp(0.85rem, 2vw, 1rem);">
+                                                        HON. {{ $member }}
+                                                    </h6>
+                                                    <p class="fw-bold text-uppercase mt-2 mb-0"
+                                                        style="font-size: clamp(0.75rem, 1.5vw, 0.85rem);">
+                                                        {{ $index == 0 ? 'COMMITTEE CHAIRMAN' : 'COMMITTEE VICE-CHAIRMAN' }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                                @php
+    $hasMembers = false;
+    foreach ($ordinance->signed_by as $index => $member) {
+        if ($index >= 2 && !empty($member))
+            $hasMembers = true;
+    }
+                                @endphp
+
+                                {{-- Bottom Row: Regular Members --}}
+                                @if($hasMembers)
+                                    <h6 class="fw-bold text-center mb-3 mb-md-4 text-uppercase"
+                                        style="font-size: clamp(0.9rem, 2vw, 1rem);">MEMBERS</h6>
+
+                                    <div class="row g-2 g-md-4 text-center justify-content-center">
+                                        @foreach($ordinance->signed_by as $index => $member)
+                                            @if(!empty($member) && $index >= 2)
+                                                <div class="col-6 col-sm-4 col-md-3 grow">
+                                                    <div class="mt-1 mt-md-2">
+                                                        <h6 class="fw-bold text-uppercase mb-0 signature-name"
+                                                            style="font-size: clamp(0.75rem, 2vw, 0.9rem);">
+                                                            HON. {{ $member }}
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                @endif
+
+                            </div>
+                        @endif
+
+                        {{-- ATTACHMENTS SECTION --}}
+                        {{-- THE FIX: Changed to !empty() to prevent PHP 8 crashing if no attachments exist --}}
+                        @if(!empty($ordinance->attachments))
+                            <div class="mb-5 mt-5 pt-5 border-top">
+                                <h5 class="fw-bold text-uppercase mb-3" style="letter-spacing: 1px;">
+                                    <i class="fas fa-file-upload pe-2"></i>ATTACHED DOCUMENTS & IMAGES
+                                    ({{ count($ordinance->attachments) }})
+                                </h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-sm align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th style="font-size: 0.85rem;"><i class="fas fa-file pe-2"></i>File Name</th>
+                                                <th style="font-size: 0.85rem;">Type</th>
+                                                <th style="font-size: 0.85rem;">Size</th>
+                                                <th style="font-size: 0.85rem;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($ordinance->attachments as $attachment)
+                                                <tr style="cursor: pointer;" class="attachment-row"
+                                                    data-file-path="{{ asset('storage/' . $attachment['file_path']) }}"
+                                                    data-file-name="{{ $attachment['original_name'] }}"
+                                                    data-file-type="{{ pathinfo($attachment['original_name'], PATHINFO_EXTENSION) }}"
+                                                    data-file-size="{{ number_format($attachment['file_size'] / 1024 / 1024, 2) }}">
+                                                    <td style="font-size: 0.9rem;">
+                                                        <i class="fas fa-file-pdf pe-2 text-danger"></i>
+                                                        {{ $attachment['original_name'] }}
+                                                    </td>
+                                                    <td style="font-size: 0.85rem;">
+                                                        <span
+                                                            class="badge bg-info">{{ strtoupper(pathinfo($attachment['original_name'], PATHINFO_EXTENSION)) }}</span>
+                                                    </td>
+                                                    <td style="font-size: 0.85rem;">
+                                                        {{ number_format($attachment['file_size'] / 1024 / 1024, 2) }} MB
+                                                    </td>
+                                                    <td style="font-size: 0.85rem;">
+                                                        <a href="{{ asset('storage/' . $attachment['file_path']) }}"
+                                                            class="btn btn-sm btn-primary" target="_blank"
+                                                            download="{{ $attachment['original_name'] }}" data-uid="true">
+                                                            <i class="fas fa-download pe-1"></i>Download
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        @endif
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ATTACHMENT VIEWER MODAL --}}
+    <div class="modal fade" id="attachmentViewerModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="attachmentFileName"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <div id="attachmentPreview"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary" id="attachmentDownloadBtn" target="_blank" download>
+                        <i class="fas fa-download pe-1"></i>Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Handle attachment row clicks
+            const attachmentRows = document.querySelectorAll('.attachment-row');
+            const modal = new bootstrap.Modal(document.getElementById('attachmentViewerModal'));
+
+            attachmentRows.forEach(row => {
+                row.addEventListener('click', function () {
+                    const filePath = this.dataset.filePath;
+                    const fileName = this.dataset.fileName;
+                    const fileType = this.dataset.fileType.toLowerCase();
+                    const fileSize = this.dataset.fileSize;
+
+                    // Update modal title and download button
+                    document.getElementById('attachmentFileName').textContent = fileName;
+                    document.getElementById('attachmentDownloadBtn').href = filePath;
+                    document.getElementById('attachmentDownloadBtn').download = fileName;
+
+                    const previewDiv = document.getElementById('attachmentPreview');
+                    previewDiv.innerHTML = '';
+
+                    // Handle different file types
+                    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+                    const pdfExtensions = ['pdf'];
+
+                    if (imageExtensions.includes(fileType)) {
+                        // Show image preview
+                        const img = document.createElement('img');
+                        img.src = filePath;
+                        img.style.maxWidth = '100%';
+                        img.style.height = 'auto';
+                        img.className = 'img-fluid rounded';
+                        previewDiv.appendChild(img);
+                    } else if (pdfExtensions.includes(fileType)) {
+                        // Show PDF embed
+                        const iframe = document.createElement('iframe');
+                        iframe.src = filePath;
+                        iframe.style.width = '100%';
+                        iframe.style.height = '600px';
+                        iframe.style.border = 'none';
+                        iframe.style.borderRadius = '0.375rem';
+                        previewDiv.appendChild(iframe);
+                    } else {
+                        // Show generic file preview
+                        const fileInfo = document.createElement('div');
+                        fileInfo.className = 'alert alert-info';
+                        fileInfo.innerHTML = `
+                                <div class="text-center">
+                                    <i class="fas fa-file fa-3x mb-3 text-info"></i>
+                                    <h5>File: ${fileName}</h5>
+                                    <p class="mb-1"><strong>Type:</strong> ${fileType.toUpperCase()}</p>
+                                    <p class="mb-3"><strong>Size:</strong> ${fileSize} MB</p>
+                                    <p class="text-muted">Click the Download button to view or save this file</p>
+                                </div>
+                            `;
+                        previewDiv.appendChild(fileInfo);
+                    }
+
+                    // Show modal
+                    modal.show();
+                });
+            });
+        });
+    </script>
+
+@endsection

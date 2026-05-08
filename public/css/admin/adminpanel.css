@@ -1,0 +1,119 @@
+.dashboard-title {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.ordinance-title{
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Layout to keep footer at the bottom */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Ensure topdiv appears at the top */
+.topdiv {
+    order: -1; /* Make sure topdiv appears first */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.site-footer {
+    margin-top: auto;
+    /* push footer to the bottom */
+    width: 100%;
+    background: #f8f9fa;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0.75rem 0;
+}
+
+.site-footer .footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Small tweak so fixed headers or tall navbars don't overlay content */
+.container,
+.container-fluid {
+    flex-grow: 1;
+    /* allow containers to grow naturally within the flex layout */
+}
+
+@media (max-width: 767.98px) {
+    body {
+        min-height: 100vh;
+    }
+}
+
+.content-dashboard {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/*
+.choices {
+    text-decoration: none;
+    color: inherit;
+}
+
+.choices:hover {
+    color: #00ff40;
+    cursor: pointer;
+}
+*/
+.choices {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    color: #000000;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.choices:hover {
+    transform: translateY(-3px);
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #00ff40;
+}
+
+.choices-container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    background-color: #F5F5DC;
+}
+
+.button-view {
+    font-family: 'Courier New', Courier, monospace;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.button-view:hover {
+    background-color: #00ff40;
+    color: #ffffff;
+}
+
+.greetings {
+    font-size: 25px;
+    font-weight: bold;
+    color: #000000;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}

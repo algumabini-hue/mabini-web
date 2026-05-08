@@ -1,0 +1,19 @@
+.footer-overlay {
+    position: relative;
+    /* Replace URL with your actual photo path */
+    background-image:
+        linear-gradient(rgba(25, 135, 84, 0.8), rgba(25, 135, 84, 0.8)),
+        url('/images/bg.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* Optional: adds a parallax effect */
+}
+
+/* Ensure the background image doesn't make text unreadable */
+#main-footer {
+    background-color: #198754;
+    /* Fallback color */
+}

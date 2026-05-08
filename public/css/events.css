@@ -1,0 +1,289 @@
+/* Main container for the 2x2 grid with a background watermark */
+.event-grid-container {
+    background-size: 40%;
+    padding:  0;
+}
+
+/* =========================================
+   EVENTS SECTION WATERMARK MAINPAGE main blade
+   ========================================= */
+.event-watermark-wrapper {
+    position: relative;
+    overflow: hidden;
+    /* IMPORTANT: Keeps the watermark securely inside the new border frame */
+    border-color: #e0e0e0 !important;
+    /* Soft gray border line */
+}
+
+/* The Localized Logo Background */
+.event-watermark-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 450px;
+    /* Scaled down slightly to fit the new bordered box perfectly */
+    height: 100%;
+    background-image: url('/images/');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    opacity: 0.08;
+    /* Slightly lighter so it doesn't distract from the cards in the box */
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Ensures the row of cards floats cleanly above the watermark */
+.event-watermark-wrapper .row.z-1 {
+    z-index: 1;
+}
+
+/* Standardizes the event card appearance */
+.event-card {
+    border: 1px solid #7f8c8d;
+    /* Subtle dark border from image */
+    border-radius: 0;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.shadow-soft {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.event-img {
+    height: 280px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    /* Using a subtle grey filter to mimic the placeholder aesthetic */
+    filter: grayscale(10%) brightness(1.05);
+}
+
+/* Positions text at the bottom-left over the image */
+.event-overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    /* Typewriter font style */
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+}
+
+.event-date {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+
+.event-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* --- Description Page Specific Styles --- */
+/* --- New White Box for Content --- */
+.desc-white-box {
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow to lift it off the background */
+    border: 1px solid #eaeaea;
+    /* Light border similar to the history page structure */
+    min-height: 80vh;
+    /* Ensures the white box stretches nicely */
+}
+/* --- Updated Path (Breadcrumb) --- */
+.custom-path {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.15rem;
+    /* Increased size (was 0.85rem) */
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.path-link {
+    color: #7f8c8d;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.path-link:hover {
+    color: #111;
+}
+
+.path-separator {
+    color: #ccc;
+    margin: 0 10px;
+}
+
+.path-current {
+    color: #222;
+}
+
+/* Typography styles for the description text */
+.desc-date {
+    font-family: 'Courier New', Courier, monospace;
+    color: #555;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.desc-caption {
+    color: #444;
+    line-height: 1.8;
+    font-size: 1.15rem;
+}
+
+/* Custom divider to match the theme */
+.divider-custom {
+    border-top: 2px solid #7f8c8d;
+    opacity: 0.3;
+    width: 60px;
+}
+
+/* Description Images (Based on your .event-img but larger for this view) */
+.desc-img {
+    height: 400px;
+    /* Adjusted to your original request */
+    object-fit: cover;
+    filter: grayscale(5%) brightness(1.02);
+    /* Slightly less filtered than the thumbnails */
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.event-card:hover .desc-img {
+    transform: scale(1.02);
+    /* Slight zoom effect on hover */
+}
+
+/* Gives a visual cue that the image can be clicked */
+.lightbox-trigger {
+    cursor: zoom-in;
+}
+
+/* Darkens the background when the lightbox is open */
+.modal-backdrop.show {
+    opacity: 0.9 !important;
+    background-color: #000 !important;
+}
+
+/* --- Custom Lightbox Close Button --- */
+.lightbox-close-btn {
+    position: fixed;
+    /* Keeps it pinned to the screen */
+    top: 25px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent dark background */
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    /* Adjusts icon size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1060;
+    /* Ensures it sits above EVERYTHING else */
+    transition: all 0.3s ease;
+}
+
+/* Red hover effect so users instantly know it closes the window */
+.lightbox-close-btn:hover {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* --- Admin Upload Page Styles --- */
+
+.upload-card {
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.image-placeholder {
+    background-color: #e9ecef;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.btn-browse {
+    background-color: #7066f5;
+    color: white;
+    border: none;
+    padding: 8px 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.btn-browse:hover {
+    background-color: #5a52d4;
+    color: white;
+}
+
+.label-caps {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.preview-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.delete-btn {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.delete-btn:hover {
+    background: #cc0000;
+}

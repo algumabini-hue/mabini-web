@@ -1,0 +1,255 @@
+/* =========================================
+   MABINI OFFICIAL COLOR PALETTE
+   ========================================= */
+:root {
+    --theme-dark: #333333;
+    /* Deep charcoal for buttons & overlays */
+    --theme-gray: #7F8C8D;
+    /* Medium gray for ribbons & accents */
+    --theme-silver: #BDC3C7;
+    /* Light silver for subtle highlights */
+    --theme-text: #2C3E50;
+    /* Dark slate for highly readable text */
+
+    /* Premium White Smoke background gradient */
+    --theme-bg-gradient: linear-gradient(180deg, #948383 0%, #322a2a 100%);
+}
+
+/* =========================================
+   GLOBAL BODY & WATERMARK
+   ========================================= */
+* {
+    scroll-behavior: smooth;
+}
+
+body {
+        min-height: 100vh;
+        background-attachment: fixed;
+        position: relative;
+        color: var(--theme-text);
+}
+
+/*
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/body.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+
+    /* Dropped the opacity slightly since the background is now lighter 
+    opacity: 0.25;
+    z-index: -1;
+    pointer-events: none;
+}
+*/
+/* =========================================
+   2. MUNICIPALITY VIDEO SECTION
+   ========================================= */
+.home-video-card {
+    /* Removed the 20px border radius so it sits flush against the screen */
+    border-radius: 0;
+}
+
+.card-video {
+    width: 100%;
+    /* Set to 100vh to fill the exact height of the viewport */
+    height: 100vh;
+    object-fit: cover;
+    /* Removed min and max heights to allow 100vh to take full control */
+}
+
+/* BRANDED VIDEO OVERLAY */
+.video-overlay-dark {
+    /* Fades using the new Charcoal Gray */
+    background: linear-gradient(to bottom, rgba(51, 51, 51, 0.3) 0%, rgba(51, 51, 51, 0.85) 50%, rgba(51, 51, 51, 0.3) 100%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* THE GRAIN EFFECT FOR VIDEO OVERLAY */
+.video-overlay-dark::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.25;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Keeps the text cleanly layered over the grain effect */
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+/* =========================================
+   MISSION/VISION REVEAL ANIMATIONS
+   ========================================= */
+
+/* The text is hidden and pushed down slightly by default */
+.hidden-content {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* The styling for our left and right arrows */
+.reveal-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    animation: pulse-arrow 2.5s infinite;
+}
+
+.left-arrow {
+    left: 20px;
+}
+
+.right-arrow {
+    right: 20px;
+}
+
+/* A subtle pulse animation to draw the user's eye to the arrows */
+@keyframes pulse-arrow {
+    0% {
+        transform: translateY(-50%) scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translateY(-50%) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-50%) scale(1);
+        opacity: 0.5;
+    }
+}
+
+/* --- THE REVEAL TRIGGERS --- */
+
+/* 1. Desktop Hover Reveal (Only applies if device has a hoverable mouse) */
+@media (hover: hover) {
+    .home-video-card:hover .hidden-content {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .home-video-card:hover .reveal-arrow {
+        opacity: 0;
+        /* Hides arrows smoothly once text appears */
+        visibility: hidden;
+    }
+}
+
+/* 2. Mobile Click Reveal (Triggered by the JavaScript function) */
+.home-video-card.content-active .hidden-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.home-video-card.content-active .reveal-arrow {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* OFFICIAL HEADINGS (Mission/Vision) */
+.official-heading {
+    color: #ffffff;
+    border-bottom: 3px solid var(--theme-silver);
+    display: inline-block;
+    letter-spacing: 2px;
+}
+
+@media (min-width: 768px) {
+    .border-start-md {
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+
+/* =========================================
+   3. CUSTOM BRANDED BUTTONS
+   ========================================= */
+.btn-theme-dark {
+    background-color: var(--theme-dark);
+    color: #ffffff;
+    border: 2px solid var(--theme-dark);
+    transition: all 0.3s ease;
+}
+
+.btn-theme-dark:hover {
+    background-color: transparent;
+    color: var(--theme-dark);
+    border: 2px solid var(--theme-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(51, 51, 51, 0.15) !important;
+}
+
+/* =========================================
+   MODERN ACCENT HEADER
+   ========================================= */
+.modern-accent-heading {
+    color: var(--theme-dark);
+    font-weight: 900;
+    font-size: 1.75rem;
+    letter-spacing: 0.5px;
+    padding-left: 15px;
+    /* This creates the sleek vertical bar */
+    border-left: 6px solid var(--theme-dark);
+    text-transform: uppercase;
+}
+
+/* =========================================
+   5. SCROLL ANIMATIONS
+   ========================================= */
+.scroll-fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+.scroll-fade-in.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* =========================================
+   6. MOBILE RESPONSIVENESS OVERRIDES
+   ========================================= */
+@media (max-width: 767.98px) {
+    .card-video {
+        min-height: 400px;
+        height: auto;
+    }
+
+    .mission-vision-container {
+        padding-bottom: 10px;
+    }
+
+    .hide-on-mobile {
+        display: none;
+    }
+}

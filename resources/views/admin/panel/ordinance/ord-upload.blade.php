@@ -19,7 +19,7 @@
                 <h4 class="mb-0 fw-bold text-secondary text-center w-100" style="letter-spacing: 2px; font-size: 1.5rem;">
                     ORDINANCE UPLOAD</h4>
 
-                <button type="submit" id="submitBtn" class="btn fw-bold px-3 px-md-4 text-dark w-100 w-md-auto"
+                <button type="submit" id="submitBtn" data-uid="true" class="btn fw-bold px-3 px-md-4 text-dark w-100 w-md-auto"
                     style="background-color: #6eff6e; border: 1px solid #4ade4a; box-shadow: 2px 2px 0px rgba(0,0,0,0.1);">
                     UPLOAD
                 </button>

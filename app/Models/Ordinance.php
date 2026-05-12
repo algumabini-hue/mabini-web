@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+
 class Ordinance extends Model
 {
     use HasFactory;
@@ -12,12 +13,6 @@ class Ordinance extends Model
     protected $fillable = [
         'date_implemented',
         'subject',
-        'legal_basis',
-        'findings',
-        'description',
-        'drafted_by',
-        'signed_by',
-        'sections',
         'attachments' // ADD THIS LINE
     ];
 

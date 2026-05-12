@@ -16,17 +16,8 @@ return new class extends Migration
             // Core Info
             $table->date('date_implemented')->nullable();
             $table->longText('subject')->nullable();
-            $table->longText('legal_basis')->nullable();
-            $table->longText('findings')->nullable();
-            $table->longText('description')->nullable();
-
-            // Authorship
-            $table->string('drafted_by')->nullable();
-            $table->json('signed_by')->nullable(); // Stores the 5 names as a JSON array
-
-            // Sections
-            $table->json('sections')->nullable(); // Stores the 10 sections as a JSON array
-            $table->timestamps();
+            $table->json('attachments')->nullable();
+            
         });
     }
 

@@ -44,12 +44,6 @@ class AdminOrdinanceController extends Controller
                 Ordinance::create([
                     'date_implemented' => $ord['date_implemented'] ?? null,
                     'subject' => $ord['subject'] ?? null,
-                    'legal_basis' => $ord['legal_basis'] ?? null,
-                    'findings' => $ord['findings'] ?? null,
-                    'description' => $ord['description'] ?? null,
-                    'drafted_by' => $ord['drafted_by'] ?? null,
-                    'signed_by' => $ord['signed_by'] ?? [],
-                    'sections' => $ord['sections'] ?? [],
                     'attachments' => $attachmentData, // Add the files to the database!
                 ]);
 

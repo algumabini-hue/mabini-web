@@ -68,6 +68,6 @@ class AdminOfficialController extends Controller
         $official = Official::findOrFail($id);
 
         // Pass that specific official to your personal description blade
-        return view('officials.officials-personal', compact('officials'));
+        return view('officials.officials-personal', compact('official'));
     }   
 }

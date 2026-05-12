@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\URL; // 1. Add this import!
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        Paginator::useBootstrapFive();
+        //
     }
 
     /**
@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // 2. Add this block to force HTTPS in production
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }

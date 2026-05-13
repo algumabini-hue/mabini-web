@@ -129,8 +129,11 @@ class AdminOrdinanceController extends Controller
         $ordinance->attachments = $currentAttachments;
         $ordinance->save();
 
-        // 8. Redirect back to list
-        return redirect()->route('ord-uploaded')
+        // Grab the uid from the hidden form field
+        $uid = $request->input('uid');
+
+        // Redirect back to list, maintaining the UID
+        return redirect()->route('ord-uploaded', ['uid' => $uid])
             ->with('success', 'Ordinance updated successfully!');
     }
 

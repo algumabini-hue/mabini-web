@@ -7,9 +7,10 @@
         @include('admin.alert-message')
 
         {{-- CRITICAL FIX: Added enctype="multipart/form-data" to allow file uploads on update --}}
-        <form action="{{ route('ord-update', ['id' => $ordinance->id, 'uid' => request('uid')]) }}" method="POST"
-            enctype="multipart/form-data" id="ordinanceEditForm">
+        <form action="{{ route('ord-update', $ordinance->id) }}" method="POST" enctype="multipart/form-data" id="ordinanceEditForm">
+            @csrf
             @method('PUT')
+            <input type="hidden" name="uid" value="{{ request('uid') }}">
 
             {{-- Top Header Bar --}}
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 mb-4 mb-md-5">

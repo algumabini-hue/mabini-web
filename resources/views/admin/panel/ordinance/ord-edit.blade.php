@@ -20,7 +20,7 @@
 
                 <h4 class="mb-0 fw-bold text-secondary text-center w-100" style="letter-spacing: 2px; font-size: 1.5rem;">EDIT ORDINANCE</h4>
 
-                <button type="submit" id="submitBtn" class="btn fw-bold px-3 px-md-4 text-dark w-100 w-md-auto"
+                <button type="submit" id="submitBtn" class="btn fw-bold px-3 px-md-4 text-dark w-100 w-md-auto" data-uid="true"
                     style="background-color: #6eff6e; border: 1px solid #4ade4a; box-shadow: 2px 2px 0px rgba(0,0,0,0.1);">
                     SAVE CHANGES
                 </button>
@@ -78,7 +78,7 @@
                                                 <div class="preview-wrapper position-relative shadow-sm rounded border" style="padding-top: 100%; overflow: hidden; background: #f8f9fa;">
 
                                                     {{-- Delete Button --}}
-                                                    <button type="button" class="btn btn-danger remove-btn" 
+                                                    <button type="button" data-uid="true" class="btn btn-danger remove-btn" 
                                                         onclick="removeExistingAttachment(this, '{{ $attachment['file_path'] }}')"
                                                         title="Delete this file">
                                                         <i class="fas fa-times"></i>

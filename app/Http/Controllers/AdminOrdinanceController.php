@@ -147,21 +147,7 @@ class AdminOrdinanceController extends Controller
             ->with('success', 'Ordinance deleted successfully!');
     }
 
-    public function up()
-    {
-        Schema::table('ordinances', function (Blueprint $table) {
-            // Adds the 'attachments' column as a JSON type, allowing it to be empty (nullable)
-            $table->json('attachments')->nullable()->after('sections');
-        });
-    }
 
-    public function down()
-    {
-        Schema::table('ordinances', function (Blueprint $table) {
-            // Removes the column if you ever need to rollback
-            $table->dropColumn('attachments');
-        });
-    }
 
     //----------------------------------------------------------------
 }

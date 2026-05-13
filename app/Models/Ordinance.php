@@ -10,6 +10,8 @@ class Ordinance extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'date_implemented',
         'subject',

@@ -62,75 +62,85 @@ Route::get('/api/municipality-events/{event}', [MunicipalityEventController::cla
 // Viewer Page (Short URL: /ordinances)
 Route::get('/ordinances', [DashboardController::class, 'ordinances'])->middleware('auth')->name('ordinances');
 
-// The Upload Form (Short URL: /ord-upload)
-Route::get('/ord-upload', function () {
-    return view('admin.panel.ordinance.ord-upload');
-})->name('ordinance');
+// ==========================================================
+// SECURE ADMIN ROUTE GROUP
+// All routes inside this block require the user to be logged in.
+// ==========================================================
+Route::middleware(['auth'])->group(function () {
 
-// Saving the Upload (Hidden action)
-Route::post('/ord-upload', [AdminOrdinanceController::class, 'store'])->name('ord-upload.store');
+    // ==========================================
+    // --- ORDINANCES ---
+    // ==========================================
 
-// The Uploaded List (Short URL: /ord-uploaded)
-Route::get('/ord-uploaded', function (Request $request) {
-    $query = Ordinance::query();
+    // The Upload Form (Short URL: /ord-upload)
+    Route::get('/ord-upload', function () {
+        return view('admin.panel.ordinance.ord-upload');
+    })->name('ordinance');
 
-    if ($request->filled('year')) {
-        $query->whereYear('date_implemented', $request->year);
-    }
-    if ($request->filled('month')) {
-        $query->whereMonth('date_implemented', $request->month);
-    }
+    // Saving the Upload (Hidden action)
+    Route::post('/ord-upload', [AdminOrdinanceController::class, 'store'])->name('ord-upload.store');
 
-    $availableYears = Ordinance::selectRaw('YEAR(date_implemented) as year')
-        ->whereNotNull('date_implemented')->distinct()->orderBy('year', 'desc')->pluck('year');
+    // The Uploaded List (Short URL: /ord-uploaded)
+    Route::get('/ord-uploaded', function (Request $request) {
+        $query = Ordinance::query();
 
-    if ($request->filled('sort')) {
-        switch ($request->sort) {
-            case 'oldest':
-                $query->orderBy('date_implemented', 'asc');
-                break;
-            case 'title_asc':
-                $query->orderBy('subject', 'asc');
-                break;
-            case 'title_desc':
-                $query->orderBy('subject', 'desc');
-                break;
-            case 'newest':
-            default:
-                $query->orderBy('date_implemented', 'desc');
-                break;
+        if ($request->filled('year')) {
+            $query->whereYear('date_implemented', $request->year);
         }
-    } else {
-        $query->orderBy('date_implemented', 'desc');
-    }
+        if ($request->filled('month')) {
+            $query->whereMonth('date_implemented', $request->month);
+        }
 
-    $ordinances = $query->paginate(12);
-    return view('admin.panel.ordinance.ord-uploaded', compact('ordinances', 'availableYears'));
-})->name('ord-uploaded');
+        $availableYears = Ordinance::selectRaw('YEAR(date_implemented) as year')
+            ->whereNotNull('date_implemented')->distinct()->orderBy('year', 'desc')->pluck('year');
 
-Route::post('/ord-uploaded', [AdminOrdinanceController::class, 'show'])->name('ord-uploaded.show');
+        if ($request->filled('sort')) {
+            switch ($request->sort) {
+                case 'oldest':
+                    $query->orderBy('date_implemented', 'asc');
+                    break;
+                case 'title_asc':
+                    $query->orderBy('subject', 'asc');
+                    break;
+                case 'title_desc':
+                    $query->orderBy('subject', 'desc');
+                    break;
+                case 'newest':
+                default:
+                    $query->orderBy('date_implemented', 'desc');
+                    break;
+            }
+        } else {
+            $query->orderBy('date_implemented', 'desc');
+        }
 
-// Ordinance Actions
+        $ordinances = $query->paginate(12);
+        return view('admin.panel.ordinance.ord-uploaded', compact('ordinances', 'availableYears'));
+    })->name('ord-uploaded');
+
+    Route::post('/ord-uploaded', [AdminOrdinanceController::class, 'show'])->name('ord-uploaded.show');
+
+    // Ordinance Actions
+    Route::get('/ord-uploaded/{id}/edit', [AdminOrdinanceController::class, 'edit'])->name('ord-edit');
+    Route::put('/ord-uploaded/{id}', [AdminOrdinanceController::class, 'update'])->name('ord-update');
+    Route::delete('/ord-uploaded/{id}', [AdminOrdinanceController::class, 'destroy'])->name('ord-delete');
 
 
-Route::get('/ord-uploaded/{id}/edit', [AdminOrdinanceController::class, 'edit'])->name('ord-edit');
-Route::put('/ord-uploaded/{id}', [AdminOrdinanceController::class, 'update'])->name('ord-update');
-Route::delete('/ord-uploaded/{id}', [AdminOrdinanceController::class, 'destroy'])->name('ord-delete');
+    // ==========================================
+    // --- OFFICIALS ---
+    // ==========================================
 
+    // Viewer Page (Short URL: /officials)
+    Route::get('/officials', [DashboardController::class, 'officials'])->name('officials');
 
-// ==========================================
-// ---OFFICIALS---
-// ==========================================
+    // Official Upload Action
+    Route::post('/officials/store', [AdminOfficialController::class, 'store'])->name('admin.officials.store');
 
-// Viewer Page (Short URL: /officials)
-Route::get('/officials', [DashboardController::class, 'officials'])->middleware('auth')->name('officials');
+    // The Upload/Manage Form
+    Route::get('/officials-upload', function () {
+        $officials = Official::all()->keyBy('position_key');
+        return view('admin.panel.official.officials', compact('officials'));
+    })->name('official');
 
-// Official Upload Action
-Route::post('/officials/store', [AdminOfficialController::class, 'store'])->middleware('auth')->name('admin.officials.store');
-
-// The Upload/Manage Form 
-// Note: We have to call this /officials-upload or /officials/manage because /officials is already used by the Viewer page above!
-Route::get('/officials-upload', function () {
-    $officials = Official::all()->keyBy('position_key');
-    return view('admin.panel.official.officials', compact('officials'));
-})->name('official');
+});
+// === END OF SECURE ADMIN ROUTES ===

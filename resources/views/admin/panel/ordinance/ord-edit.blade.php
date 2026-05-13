@@ -7,8 +7,8 @@
         @include('admin.alert-message')
 
         {{-- CRITICAL FIX: Added enctype="multipart/form-data" to allow file uploads on update --}}
-        <form action="{{ route('ord-update', $ordinance->id) }}" method="POST" enctype="multipart/form-data" id="ordinanceEditForm">
-            @csrf
+        <form action="{{ route('ord-update', ['id' => $ordinance->id, 'uid' => request('uid')]) }}" method="POST"
+            enctype="multipart/form-data" id="ordinanceEditForm">
             @method('PUT')
 
             {{-- Top Header Bar --}}

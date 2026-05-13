@@ -137,16 +137,18 @@ class AdminOrdinanceController extends Controller
             ->with('success', 'Ordinance updated successfully!');
     }
 
-    public function destroy($id)
+    // 1. ADD "Request $request" inside the parenthesis!
+    public function destroy(Request $request, $id)
     {
-        // 1. Find the exact ordinance in the database
+        // 2. Find and delete the ordinance
         $ordinance = Ordinance::findOrFail($id);
-
-        // 2. Delete it
         $ordinance->delete();
 
-        // 3. Redirect the user back to the list with a success message
-        return redirect()->route('ord-uploaded')
+        // 3. Catch the UID from the mini-form
+        $uid = $request->input('uid');
+
+        // 4. Pass it back into the redirect!
+        return redirect()->route('ord-uploaded', ['uid' => $uid])
             ->with('success', 'Ordinance deleted successfully!');
     }
 

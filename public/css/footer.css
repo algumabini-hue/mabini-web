@@ -1,3 +1,6 @@
+/* =========================================
+   FOOTER STYLING
+   ========================================= */
 .footer-overlay {
     position: relative;
     /* Replace URL with your actual photo path */
@@ -8,12 +11,30 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    /* Beautiful parallax effect for Desktop browsers */
     background-attachment: fixed;
-    /* Optional: adds a parallax effect */
 }
 
 /* Ensure the background image doesn't make text unreadable */
 #main-footer {
     background-color: #198754;
     /* Fallback color */
+}
+
+/* =========================================
+   RESPONSIVENESS (Tablet & Mobile)
+   ========================================= */
+
+/* TABLETS AND PHONES (Under 992px) */
+@media (max-width: 991px) {
+    .footer-overlay {
+        /* CRITICAL FIX: iOS Safari cannot handle background-attachment: fixed properly. 
+           It causes massive zooming and scroll lag. Changing this to 'scroll' 
+           turns off parallax for mobile and saves your performance! */
+        background-attachment: scroll;
+
+        /* Ensures the most important part of the image stays in view */
+        background-position: center top;
+    }
 }

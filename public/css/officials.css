@@ -1,15 +1,12 @@
 /* =========================================
-   OFFICIALS SECTION WATERMARK MAINPAGE main blade
+   1. OFFICIALS SECTION WATERMARK & BANNER
    ========================================= */
 .officials-watermark-wrapper {
     position: relative;
     overflow: hidden;
-    /* IMPORTANT: Keeps the watermark securely inside the new border frame */
     border-color: #e0e0e0 !important;
-    /* Soft gray border line */
 }
 
-/* The Localized Logo Background */
 .officials-watermark-wrapper::before {
     content: "";
     position: absolute;
@@ -18,39 +15,32 @@
     transform: translate(-50%, -50%);
     width: 100%;
     max-width: 450px;
-    /* Scaled down slightly to fit the new bordered box perfectly */
     height: 100%;
     background-image: url('/images/logo.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-
     opacity: 0.08;
-    /* Slightly lighter so it doesn't distract from the cards in the box */
     z-index: 0;
     pointer-events: none;
 }
 
-/* Ensures the row of cards floats cleanly above the watermark */
 .officials-watermark-wrapper .row.z-1 {
     z-index: 1;
 }
 
-/* OFFICIAL CHART HEADER */
 .officials-header {
     font-size: 1.5rem;
-    
-    /* CHANGED to 900 (Lato Black) */
     letter-spacing: 1px;
     line-height: 1.2;
 }
 
-/* IMAGE WRAPPER */
 .officials-img-wrapper {
     width: 100%;
+    position: relative;
 }
 
-/* NEW: THE DARK GRADIENT OVERLAY */
+/* DARK GRADIENT OVERLAY */
 .officials-img-wrapper::before {
     content: "";
     position: absolute;
@@ -58,14 +48,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* Fades from nearly transparent at the top to a rich Charcoal gray at the bottom */
     background: linear-gradient(to bottom, rgba(51, 51, 51, 0) 0%, rgba(51, 51, 51, 0.4) 50%, rgba(51, 51, 51, 0.95) 70%);
     z-index: 1;
-    /* Sits directly above the image */
     pointer-events: none;
 }
 
-/* EXISTING: THE GRAIN EFFECT */
+/* GRAIN EFFECT */
 .officials-img-wrapper::after {
     content: "";
     position: absolute;
@@ -73,13 +61,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* Subtle Grain SVG pattern */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     opacity: 0.25;
     mix-blend-mode: overlay;
     pointer-events: none;
-
-    /* UPDATED: Bumped to z-index 2 so the grain sits on top of the dark gradient */
     z-index: 2;
 }
 
@@ -91,90 +76,56 @@
     object-fit: cover;
     display: block;
     border-radius: 12px;
-    /* Slight rounding on the image within the border */
 }
 
 /* =========================================
-   PURE CSS VINTAGE BORDER
+   2. PURE CSS VINTAGE BORDER
    ========================================= */
-
 .css-vintage-border-container {
     position: relative;
-    /* This padding dictates how thick the vintage border will be.
-       Increase it for a thicker frame, decrease for a thinner one. 
-    */
     padding: 15px;
-
-    /* The color of the vintage frame. 
-       Using your dark theme color for elegance, but you could use a gold hex code (e.g., #DAA520) 
-    */
     background-color: var(--theme-dark);
-
-    /* Small shadow to separate the frame from the white card slightly */
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
     border-radius: 8px;
-    /* Slightly round the outer corners of the frame */
-
-    /* THE MAGIC: CSS Masking
-       This creates a repeating pattern of cut-out circles along the edges.
-       Adjust the '15px' values to make the scallops larger or smaller.
-    */
     -webkit-mask-image:
         radial-gradient(circle at top left, transparent 15px, black 16px),
         radial-gradient(circle at top right, transparent 15px, black 16px),
         radial-gradient(circle at bottom left, transparent 15px, black 16px),
         radial-gradient(circle at bottom right, transparent 15px, black 16px),
         radial-gradient(circle at center, black 100%, transparent 0);
-    -webkit-mask-position:
-        top left, top right, bottom left, bottom right, center;
+    -webkit-mask-position: top left, top right, bottom left, bottom right, center;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: 51% 51%;
-    /* Ensures the masks meet in the middle seamlessly */
-
     mask-image:
         radial-gradient(circle at top left, transparent 15px, black 16px),
         radial-gradient(circle at top right, transparent 15px, black 16px),
         radial-gradient(circle at bottom left, transparent 15px, black 16px),
         radial-gradient(circle at bottom right, transparent 15px, black 16px),
         radial-gradient(circle at center, black 100%, transparent 0);
-    mask-position:
-        top left, top right, bottom left, bottom right, center;
+    mask-position: top left, top right, bottom left, bottom right, center;
     mask-repeat: no-repeat;
     mask-size: 51% 51%;
 }
 
-/* Ensure the image inside fills the space correctly without overriding the mask */
 .css-vintage-border-container .officials-img-wrapper {
     border-radius: 4px;
-    /* Soften the inner edge where the image meets the border */
     overflow: hidden;
 }
 
-/* Ensure text overlays sit ABOVE the new border container */
-.officials-text-left,
-.officials-seal {
-    z-index: 10;
-}
-
-/* LEFT TEXT OVERLAY (List of Officials) */
+/* LEFT TEXT OVERLAY */
 .officials-text-left {
     position: absolute;
     bottom: 30px;
     left: 40px;
     color: white;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-    z-index: 2;
-    /* Sits above the arced curve but below the vintage frame meddling with text */
+    z-index: 10;
+    /* Unified z-index */
+    transition: transform 0.25s ease-out;
 }
 
-/* LEFT TEXT OVERLAY (List of Officials) */
 .officials-text-left h2,
 .officials-text-left p {
     color: white !important;
-
-    /* NEW: Layered shadow effect! 
-       The first part makes the edges crisp, the second part creates a soft dark glow behind the text 
-    */
     text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.9), 0px 0px 15px rgba(0, 0, 0, 0.7) !important;
 }
 
@@ -200,149 +151,44 @@
     right: 0;
     width: 300px;
     height: 200px;
-    background-color: var(--mabini-green);
-    /* Use your defined palette variable */
+    background-color: var(--theme-dark);
+    /* Ensure variable is active */
     border-top-left-radius: 100%;
     z-index: 1;
-    /* Sits directly above the image layer */
 }
 
-/* =========================================
-   FRAMED LOGO/SEAL STYLING (Overlay)
-   ========================================= */
-
+/* FRAMED LOGO/SEAL STYLING */
 .officials-seal-framed {
-    /* Pinned to the bottom right of the image wrapper */
+    position: absolute;
     bottom: 20px;
     right: 30px;
     width: 140px;
-    /* Slightly smaller so it doesn't block too much of the photo */
     height: 140px;
     z-index: 10;
-    /* Ensures it sits above the photo and the grain effect */
+    transition: transform 0.5s ease;
 }
 
-/* THE CIRCLE BACKGROUND MAGIC */
-
-
-/* The actual PNG logo */
 .officials-seal {
     width: 100%;
     height: 100%;
     object-fit: contain;
-
-    /* NEW: Drop shadow on the seal itself! 
-       This lifts the seal slightly off its own white background circle 
-    */
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
 }
 
-/* Refined responsiveness */
-@media (max-width: 767.98px) {
-    .officials-seal-framed {
-        width: 90px;
-        height: 90px;
-        bottom: 15px;
-        right: 15px;
-    }
-}
-
-/* MOBILE RESPONSIVENESS (Refined for new elements) */
-@media (max-width: 767.98px) {
-    .modern-accent-heading {
-        font-size: 1.25rem;
-        padding-left: 10px;
-        border-left-width: 4px;
-    }
-
-    .officials-img {
-        min-height: 350px;
-    }
-
-    /* Scaling grain for mobile readability */
-    .officials-img-wrapper::after {
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    }
-
-    .officials-text-left {
-        bottom: 20px;
-        left: 20px;
-    }
-
-    .officials-text-left h2 {
-        font-size: 1.8rem;
-    }
-
-    .officials-text-left p {
-        font-size: 1.1rem;
-    }
-
-    .officials-curve-right {
-        width: 180px;
-        height: 120px;
-    }
-
-    .officials-seal {
-        width: 90px;
-        bottom: 10px;
-        right: 15px;
-    }
-}
-
-/* =========================================
-   SEPARATE HOVER EFFECTS (Text & Logo)
-   ========================================= */
-
-/* --- 1. Text Hover Effect --- */
-
-/* We target the entire text container and use :hover to apply 
-   transformations to its children (the h2 and p tags).
-*/
-.officials-text-left {
-    /* Required for transform to work and for smoothness */
-    transition: transform 0.25s ease-out;
-}
-
-/* EFFECT: Scale and slightly lighten the entire text block.
-   Targeting both the h2 and p ensures a cohesive lift.
-*/
+/* HOVER EFFECTS */
 .officials-link-wrapper:hover .officials-text-left h2,
 .officials-link-wrapper:hover .officials-text-left p {
-    /* Grown by 5% and color shifts towards your theme silver */
     transform: scale(1.05);
     color: var(--theme-silver) !important;
 }
 
-
-/* --- 2. Logo Hover Effect --- */
-
-/* We apply the transformation and transition directly to the seal wrapper.
-   We already have the transition property for the 'officials-card:hover' lift,
-   so we can just add the :hover effect here.
-*/
-.officials-seal-framed {
-    /* Adding a transition property specifically for the rotation and scale */
-    transition: transform 0.5s ease;
-}
-
-/* EFFECT: Scale up and rotate the Mabini Seal.
-   This makes the seal feel active and authoritative.
-*/
 .officials-link-wrapper:hover .officials-seal-framed {
-    /* Grows by 15% and rotates 15 degrees clockwise */
     transform: scale(1.15) rotate(15deg);
 }
 
-/* ensure z-index allows hovering on these specific elements */
-.officials-text-left,
-.officials-seal-framed {
-    z-index: 10;
-}
-
-
 /* =========================================
-           1. SECTION & BACKGROUND WATERMARK
-           ========================================= */
+   3. OFFICIALS CHART (Grid Section)
+   ========================================= */
 .officials-chart {
     position: relative;
     padding: 80px 0;
@@ -366,9 +212,6 @@
     z-index: 1;
 }
 
-/* =========================================
-           2. PROFILE IMAGE STYLING
-           ========================================= */
 .profile-img-container {
     width: 180px;
     height: 180px;
@@ -387,12 +230,8 @@
     object-position: center top;
 }
 
-/* =========================================
-           3. TYPOGRAPHY
-           ========================================= */
 .profile-name {
     font-family: 'Times New Roman', serif;
-    /* Kept Serif */
     font-weight: 800;
     text-transform: uppercase;
     font-size: 1.3rem;
@@ -403,17 +242,12 @@
 
 .profile-position {
     font-family: 'Lato', sans-serif;
-    /* Cleaned up to Lato */
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.85rem;
     color: #666;
     letter-spacing: 1.5px;
     margin-bottom: 0;
-}
-
-.mb-profile-gap {
-    margin-bottom: 60px;
 }
 
 .profile-link {
@@ -432,7 +266,9 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-
+/* =========================================
+   4. PERSONAL INFO / BIO PAGE
+   ========================================= */
 .officials-section {
     padding: 80px 0;
     min-height: 100vh;
@@ -441,14 +277,13 @@
 .personal-info-container {
     position: relative;
     background-color: #ffffff;
-    padding: 4rem 4rem;
+    padding: 4rem;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* FIXED: Set global typography to Lato */
 .officials-typography {
     font-family: 'Lato', sans-serif;
     color: #212529;
@@ -459,25 +294,18 @@
     z-index: 1;
 }
 
-/* Typography Overrides */
 .profile-header-name {
     font-family: 'Georgia', 'Times New Roman', serif;
-    /* Kept Serif */
     letter-spacing: 0.15em;
-    /* Slightly tightened for better readability */
     color: #222;
-    /* Slightly darker for stronger contrast */
     font-weight: 700;
-    /* Added a touch of weight to make it pop */
     font-size: 2.5rem;
 }
 
 .info-section-title {
     font-family: 'Lato', sans-serif;
-    /* Replaced Courier */
     letter-spacing: 0.1em;
     font-weight: 900;
-    /* Lato Black for strong subheaders */
     color: #444;
     font-size: 1.1rem;
 }
@@ -486,22 +314,17 @@
 .info-value,
 .official-bio-text {
     font-family: 'Lato', sans-serif;
-    /* Replaced Courier */
     font-size: 1.05rem;
-    /* Bumped size slightly for Lato */
     color: #333;
-    /* Softened from #111 to reduce eye strain */
 }
 
 .info-label {
     font-weight: 700;
-    /* Lato Bold */
 }
 
 .official-bio-text {
     text-align: justify;
     line-height: 1.8;
-    /* Increased line-height for easier reading */
 }
 
 .official-portrait {
@@ -513,17 +336,141 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-@media (max-width: 768px) {
+/* =========================================
+   5. RESPONSIVENESS (Tablet & Mobile)
+   ========================================= */
+
+/* TABLETS (Under 992px) */
+@media (max-width: 991px) {
+
+    /* Banner Adjustments */
+    .officials-text-left h2 {
+        font-size: 2.2rem;
+    }
+
+    .officials-text-left p {
+        font-size: 1.2rem;
+    }
+
+    /* Chart Adjustments */
+    .profile-img-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    /* Personal Info Adjustments */
     .personal-info-container {
-        padding: 2rem 1.5rem;
+        padding: 3rem 2rem;
+        /* Reduced massive padding cleanly */
     }
 
     .profile-header-name {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
+    }
+
+    .official-portrait {
+        height: 340px;
+    }
+}
+
+/* PHONES (Under 768px) */
+@media (max-width: 767px) {
+
+    /* Header/Banner Image */
+    .officials-img {
+        min-height: 350px;
+    }
+
+    .officials-img-wrapper::after {
+        /* Slightly thicker grain for mobile screen contrast */
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .officials-text-left {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .officials-text-left h2 {
+        font-size: 1.6rem;
+    }
+
+    .officials-text-left p {
+        font-size: 1rem;
+    }
+
+    .officials-curve-right {
+        width: 150px;
+        height: 100px;
+    }
+
+    .officials-seal-framed {
+        width: 90px;
+        height: 90px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    /* Chart Details */
+    .officials-chart {
+        padding: 40px 0;
+    }
+
+    .profile-img-container {
+        width: 130px;
+        height: 130px;
+        margin-bottom: 15px;
+    }
+
+    .profile-name {
+        font-size: 1.1rem;
+    }
+
+    .profile-position {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+
+    /* Personal Info Page */
+    .officials-section {
+        padding: 40px 0;
+    }
+
+    .personal-info-container {
+        padding: 1.5rem;
+        /* Drastically reduced to prevent squishing text */
+    }
+
+    .profile-header-name {
+        font-size: 1.6rem;
+        letter-spacing: 0.05em;
+    }
+
+    .official-bio-text {
+        font-size: 1rem;
+        text-align: left;
+        /* CRITICAL FIX: Stops justified text from creating awkward word spacing on phones */
     }
 
     .official-portrait {
         height: 300px;
-        max-width: 250px;
+        max-width: 280px;
+        margin: 0 auto 20px auto;
+        display: block;
+    }
+}
+
+/* VERY SMALL PHONES (Under 480px) */
+@media (max-width: 479px) {
+    .officials-text-left h2 {
+        font-size: 1.4rem;
+    }
+
+    .officials-text-left p {
+        font-size: 0.9rem;
+    }
+
+    .profile-header-name {
+        font-size: 1.4rem;
     }
 }

@@ -1,6 +1,6 @@
 @include('layout.page-header', [
     'title' => 'Municipal History',
-    'bgImage' => 'images/church.jpg'
+    'bgImage' => 'images/Church.jpg'
 ])
 
 <div class="container-fluid px-4 px-xl-5 scroll-fade-in mb-5 mt-5">

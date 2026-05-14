@@ -23,31 +23,12 @@
 }
 
 body {
-        min-height: 100vh;
-        background-attachment: fixed;
-        position: relative;
-        color: var(--theme-text);
+    min-height: 100vh;
+    background-attachment: fixed;
+    position: relative;
+    color: var(--theme-text);
 }
 
-/*
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/images/body.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100%;
-
-    /* Dropped the opacity slightly since the background is now lighter 
-    opacity: 0.25;
-    z-index: -1;
-    pointer-events: none;
-}
-*/
 /* =========================================
    2. MUNICIPALITY VIDEO SECTION
    ========================================= */
@@ -188,7 +169,6 @@ body::before {
     }
 }
 
-
 /* =========================================
    3. CUSTOM BRANDED BUTTONS
    ========================================= */
@@ -237,19 +217,89 @@ body::before {
 }
 
 /* =========================================
-   6. MOBILE RESPONSIVENESS OVERRIDES
+   6. RESPONSIVENESS (Tablet & Mobile)
    ========================================= */
-@media (max-width: 767.98px) {
+
+/* TABLETS (Under 992px) */
+@media (max-width: 991px) {
+    .modern-accent-heading {
+        font-size: 1.5rem;
+        border-left-width: 5px;
+        /* Thins the vertical bar slightly to match smaller text */
+    }
+
+    .reveal-arrow {
+        font-size: 2rem;
+        /* Pushes arrows closer to the edge so they don't overlap the text in the middle */
+        left: 10px;
+    }
+
+    .right-arrow {
+        right: 10px;
+    }
+}
+
+/* PHONES (Under 768px) */
+@media (max-width: 767px) {
     .card-video {
-        min-height: 400px;
-        height: auto;
+        /* Prevents the video from breaking if content is too small */
+        min-height: 500px;
+        /* Replaces 100vh with 85svh. "svh" is modern CSS that fixes the iOS bug where the bottom navigation bar covers the bottom 15% of your video! */
+        height: 85svh;
     }
 
     .mission-vision-container {
-        padding-bottom: 10px;
+        padding-bottom: 20px;
     }
 
     .hide-on-mobile {
         display: none;
+    }
+
+    .modern-accent-heading {
+        font-size: 1.25rem;
+        border-left-width: 4px;
+        padding-left: 10px;
+    }
+
+    .official-heading {
+        font-size: 1.25rem;
+    }
+
+    .reveal-arrow {
+        font-size: 1.5rem;
+        /* Shrinks arrows so they don't dominate the small screen */
+        opacity: 0.7;
+        /* Makes them slightly more visible on mobile by default */
+    }
+
+    .hidden-content {
+        /* Reduces the vertical travel distance of the animation so it doesn't jump as jarringly on small screens */
+        transform: translateY(15px);
+    }
+}
+
+/* VERY SMALL PHONES (Under 480px) */
+@media (max-width: 479px) {
+    .card-video {
+        height: 80svh;
+        min-height: 450px;
+    }
+
+    .modern-accent-heading {
+        font-size: 1.1rem;
+    }
+
+    .official-heading {
+        font-size: 1.1rem;
+    }
+
+    .reveal-arrow {
+        font-size: 1.2rem;
+        left: 5px;
+    }
+
+    .right-arrow {
+        right: 5px;
     }
 }

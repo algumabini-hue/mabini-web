@@ -1,11 +1,28 @@
 /* =========================================
-   1. Base Navbar Styles (Desktop First)
+   1. BASE NAVBAR STYLES (Desktop First)
    ========================================= */
 .navbar-brand-text {
     line-height: 1.1;
     color: #000;
     font-family: sans-serif;
     margin-left: 10px;
+}
+
+/* Base Logo and Text Sizes */
+.navbar-logo {
+    width: 60px;
+    height: 60px;
+    transition: all 0.3s ease;
+}
+
+.brand-text-sm,
+.brand-text-md {
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+}
+
+.brand-text-lg {
+    font-size: 1.1rem;
 }
 
 .nav-link {
@@ -26,39 +43,39 @@
 }
 
 /* =========================================
-   NAVBAR SCROLL EFFECT
+   2. NAVBAR SCROLL EFFECT
    ========================================= */
 
-/* 1. Initial Transparent State (Over Dark Image) */
+/* A. Initial Transparent State (Over Dark Image) */
 .transparent-nav {
     background-color: transparent !important;
     box-shadow: none !important;
     transition: all 0.3s ease-in-out;
 }
 
-/* Make text white when transparent */
 .transparent-nav .nav-link,
 .transparent-nav .brand-text-sm,
 .transparent-nav .brand-text-md,
 .transparent-nav .brand-text-lg {
     color: #ffffff !important;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    /* Helps visibility on busy backgrounds */
 }
 
-/* Make hamburger icon white when transparent */
 .transparent-nav .custom-toggler .icon-bar {
     background-color: #ffffff;
 }
 
-/* 2. Scrolled Solid State (White Background) */
+.transparent-nav .nav-link:hover {
+    color: #198754 !important;
+}
+
+/* B. Scrolled Solid State (Green Background) */
 .scrolled-nav {
     background-color: #13bd82 !important;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
     transition: all 0.3s ease-in-out;
 }
 
-/* Make text black when scrolled */
 .scrolled-nav .nav-link,
 .scrolled-nav .brand-text-sm,
 .scrolled-nav .brand-text-md,
@@ -67,149 +84,17 @@
     text-shadow: none;
 }
 
-/* Hover effect when the navbar is transparent (Top of page) */
-.transparent-nav .nav-link:hover {
-    color: #198754 !important;
-    /* Standard Bootstrap green */
-}
-
-/* Hover effect when the navbar is green (Scrolled down) */
-.scrolled-nav .nav-link:hover {
-    color: #212529 !important;
-    /* A sharp dark charcoal/black so it pops against the green background */
-    /* Alternatively, you can use a light silver like #e9ecef if you want a soft fade instead! */
-}
-
-/* Make hamburger icon black when scrolled */
 .scrolled-nav .custom-toggler .icon-bar {
     background-color: #ffffff;
 }
 
-/* Search form aesthetics */
-.transparent-nav .form-control {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: none;
-}
-
-.scrolled-nav .form-control {
-    background-color: #ffffff;
-    border: 1px solid #ced4da;
+.scrolled-nav .nav-link:hover {
+    color: #212529 !important;
+    /* Dark charcoal hover */
 }
 
 /* =========================================
-   EXPANDABLE SEARCH BAR (Icon to Input)
-   ========================================= */
-
-.expandable-search-form {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-    width: 40px; /* Initial width: Just enough for the icon */
-    height: 40px;
-    border-radius: 50px;
-    transition: width 0.4s ease, background-color 0.4s ease;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-/* Expand the bar when hovered, or when the user clicks/types inside it */
-.search-container:hover,
-.search-container:focus-within {
-    width: 240px;
-    cursor: text;
-}
-
-.search-input {
-    flex-grow: 1;
-    border: none;
-    background: transparent;
-    outline: none;
-    padding: 0 5px 0 20px;
-    opacity: 0;
-    width: 0;
-    transition: opacity 0.4s ease, width 0.4s ease;
-}
-
-/* Show the text input when the container is expanded */
-.search-container:hover .search-input,
-.search-container:focus-within .search-input {
-    opacity: 1;
-    width: 100%;
-}
-
-.search-btn {
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: transparent;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-/* =========================================
-   SEARCH BAR COLOR ADAPTATION
-   ========================================= */
-
-/* 1. At the very top (Transparent Nav) */
-.transparent-nav .search-btn {
-    color: #ffffff;
-}
-.transparent-nav .search-container:hover,
-.transparent-nav .search-container:focus-within {
-    /* Glassmorphism effect when expanded over the photo */
-    background-color: rgba(255, 255, 255, 0.2); 
-}
-.transparent-nav .search-input {
-    color: #ffffff;
-}
-.transparent-nav .search-input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* 2. When scrolled down (White Nav) */
-.scrolled-nav .search-btn {
-    color: #ffffff;
-}
-.scrolled-nav .search-container:hover,
-.scrolled-nav .search-container:focus-within {
-    /* Light grey background when expanded over white nav */
-    background-color: #f1f3f5; 
-}
-.scrolled-nav .search-input {
-    color: #000000;
-}
-.scrolled-nav .search-input::placeholder {
-    color: #6c757d;
-}
-
-/* Mobile Tweak: Keep it full width inside the mobile menu */
-@media (max-width: 991.98px) {
-    .search-container {
-        width: 100%;
-        background-color: #f1f3f5;
-        cursor: text;
-    }
-    .search-input {
-        opacity: 1;
-        width: 100%;
-        color: #000000;
-    }
-    .search-btn {
-        color: #000000;
-    }
-}
-
-/* =========================================
-   EXPANDABLE SEARCH BAR (Icon to Input)
+   3. EXPANDABLE SEARCH BAR (Consolidated)
    ========================================= */
 
 .expandable-search-form {
@@ -223,6 +108,7 @@
     display: flex;
     align-items: center;
     width: 40px;
+    /* Initial width: Just enough for the icon */
     height: 40px;
     border-radius: 50px;
     transition: width 0.4s ease, background-color 0.4s ease;
@@ -241,8 +127,8 @@
     border: none;
     background: transparent;
     outline: none;
-    /* Increased right padding to 40px so text doesn't type under the button */
     padding: 0 40px 0 20px;
+    /* 40px right padding prevents typing under the icon */
     opacity: 0;
     width: 0;
     transition: opacity 0.4s ease, width 0.4s ease;
@@ -256,7 +142,6 @@
 
 .search-btn {
     position: absolute;
-    /* Pins the icon perfectly in place */
     right: 0;
     top: 0;
     width: 40px;
@@ -272,30 +157,45 @@
     transition: color 0.3s ease;
 }
 
-
-
-/* Base Logo and Text Sizes */
-.navbar-logo {
-    width: 60px;
-    height: 60px;
+/* SEARCH BAR COLOR ADAPTATION */
+.transparent-nav .search-btn {
+    color: #ffffff;
 }
 
-.brand-text-sm {
-    font-size: 0.8rem;
-    margin-bottom: 2px;
+.transparent-nav .search-input {
+    color: #ffffff;
 }
 
-.brand-text-md {
-    font-size: 0.8rem;
-    margin-bottom: 2px;
+.transparent-nav .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.brand-text-lg {
-    font-size: 1.1rem;
+.transparent-nav .search-container:hover,
+.transparent-nav .search-container:focus-within {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Glassmorphism */
+}
+
+.scrolled-nav .search-btn {
+    color: #ffffff;
+}
+
+.scrolled-nav .search-input {
+    color: #000000;
+}
+
+.scrolled-nav .search-input::placeholder {
+    color: #6c757d;
+}
+
+.scrolled-nav .search-container:hover,
+.scrolled-nav .search-container:focus-within {
+    background-color: #f1f3f5;
+    /* Light grey over green */
 }
 
 /* =========================================
-   2. Custom Animated Hamburger Menu
+   4. CUSTOM HAMBURGER ANIMATION
    ========================================= */
 .custom-toggler {
     border: none;
@@ -311,13 +211,12 @@
     display: block;
     width: 26px;
     height: 3px;
-    background-color: #000;
     margin: 5px auto;
     transition: all 0.3s ease-in-out;
     border-radius: 2px;
 }
 
-/* Transform to 'X' when menu is open (collapsed class is removed) */
+/* Transform to 'X' when menu is open */
 .custom-toggler:not(.collapsed) .top-bar {
     transform: translateY(8px) rotate(45deg);
 }
@@ -331,11 +230,11 @@
 }
 
 /* =========================================
-   3. Responsive Adjustments (@media Queries)
+   5. RESPONSIVENESS (Tablet & Mobile)
    ========================================= */
 
-/* Tablets and smaller (< 992px) */
-@media (max-width: 991.98px) {
+/* TABLETS (< 992px) */
+@media (max-width: 991px) {
     .navbar-logo {
         width: 50px;
         height: 50px;
@@ -350,27 +249,56 @@
         font-size: 0.95rem;
     }
 
-    /* Enhance the mobile dropdown background */
+    /* CRITICAL FIX: The Mobile Dropdown Visibility */
     #navbarContent {
-        background-color: #f8f9fa;
+        background-color: #ffffff;
+        /* Gives the dropdown a solid white base */
         padding: 15px;
         border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        margin-top: 10px;
     }
 
-    /* Tap-friendly mobile links */
-    .nav-link {
-        padding: 10px 0 !important;
+    /* Forces links to be dark inside the dropdown, even if the navbar is currently transparent! */
+    #navbarContent .nav-link {
+        color: #212529 !important;
+        text-shadow: none;
+        /* Removes the white text shadow */
+        padding: 12px 0 !important;
         border-bottom: 1px solid #dee2e6;
     }
 
-    .nav-link:last-of-type {
+    #navbarContent .nav-link:last-of-type {
         border-bottom: none;
+    }
+
+    /* Mobile Search Bar Expansion - Forces it full width */
+    .search-container {
+        width: 100%;
+        background-color: #f1f3f5;
+        cursor: text;
+        margin-top: 10px;
+    }
+
+    .search-input {
+        opacity: 1;
+        width: 100%;
+        color: #000000 !important;
+        /* Force dark text in mobile search */
+    }
+
+    .search-input::placeholder {
+        color: #6c757d !important;
+    }
+
+    .search-btn {
+        color: #000000 !important;
+        /* Force dark icon in mobile search */
     }
 }
 
-/* Mobile phones (< 576px) */
-@media (max-width: 575.98px) {
+/* PHONES (< 576px) */
+@media (max-width: 575px) {
     .navbar-logo {
         width: 40px;
         height: 40px;
@@ -383,19 +311,5 @@
 
     .brand-text-lg {
         font-size: 0.8rem;
-    }
-
-    /* Stack the search form */
-    .custom-search-form {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .custom-search-form .form-control {
-        margin-right: 0 !important;
-    }
-
-    .custom-search-form .btn {
-        width: 100%;
     }
 }

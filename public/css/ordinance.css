@@ -1,14 +1,11 @@
-
-
 /* =========================================
-   ORDINANCE SECTION WATERMARK MAINPAGE main blade
+   1. ORDINANCE SECTION WATERMARK 
    ========================================= */
 .ordinance-watermark-wrapper {
     position: relative;
     overflow: hidden;
     /* IMPORTANT: Keeps the watermark securely inside the new border frame */
     border-color: #e0e0e0 !important;
-    /* Soft gray border line */
 }
 
 /* The Localized Logo Background */
@@ -20,15 +17,12 @@
     transform: translate(-50%, -50%);
     width: 100%;
     max-width: 450px;
-    /* Scaled down slightly to fit the new bordered box perfectly */
     height: 100%;
     background-image: url('/images/logo.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-
     opacity: 0.08;
-    /* Slightly lighter so it doesn't distract from the cards in the box */
     z-index: 0;
     pointer-events: none;
 }
@@ -38,55 +32,46 @@
     z-index: 1;
 }
 
-
-/* 2. CARD STYLING */
+/* =========================================
+   2. CARD STYLING 
+   ========================================= */
 .ordinance-card {
     background: white;
     border-radius: 15px;
-    /* Soft rounded corners */
     border: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
-    /* Ensures all cards in a row are same height */
 }
 
-/* Soft shadow effect similar to reference image */
-.shadow-soft {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-}
-
-/* Hover Effect: Lifts the card slightly */
 .ordinance-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
 }
 
-
-
-
-/* ==========================================================================
-   GLOBAL UTILITIES
-   ========================================================================== */
-/* Apply the custom font to all ordinance-related text at the top level */
+/* =========================================
+   3. GLOBAL UTILITIES & TYPOGRAPHY
+   ========================================= */
 .ordinance-typography {
     font-family: 'Lato', sans-serif;
-    /* CHANGED HERE */
     color: #212529;
 }
 
-/* Custom soft shadow used on cards and documents */
 .shadow-soft {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* ==========================================================================
-   ORDINANCE DOCUMENT VIEW (Single Page)
-   ========================================================================== */
+.ordinance-section {
+    padding: 80px 0;
+    min-height: 100vh;
+}
+
+/* =========================================
+   4. ORDINANCE DOCUMENT VIEW (Single Page)
+   ========================================= */
 .ordinance-document {
     position: relative;
     border: 1px solid #e0e0e0;
     overflow: hidden;
-    /* Contains the watermark if you add one */
     transition: all 0.3s ease;
 }
 
@@ -97,7 +82,6 @@
 
 .ordinance-title {
     font-weight: 900;
-    /* CHANGED to 900 (Lato Black) for better impact */
     line-height: 1.8;
     text-align: justify;
     margin-bottom: 0;
@@ -109,14 +93,11 @@
     font-size: 0.95rem;
     margin-bottom: 0;
     font-weight: 400;
-    /* Ensures the body text uses regular Lato */
 }
 
-/* Custom styling for the committee header to replace inline Blade styles */
 .committee-header {
     font-size: 1.2rem;
     font-weight: 900;
-    /* CHANGED to 900 (Lato Black) */
     letter-spacing: 1px;
     line-height: 1.2;
 }
@@ -126,19 +107,9 @@
     text-underline-offset: 4px;
 }
 
-/* ==========================================================================
-   ORDINANCE LIST VIEW (Cards & Backgrounds)
-   ========================================================================== */
-.ordinance-section {
-    padding: 80px 0;
-    /* Note: Officials was 60px, unified to 80px for consistency */
-    min-height: 100vh;
-}
-
-
-/* ==========================================================================
-   PAGINATION OVERRIDES
-   ========================================================================== */
+/* =========================================
+   5. PAGINATION OVERRIDES
+   ========================================= */
 .pagination {
     gap: 8px;
     flex-wrap: wrap;
@@ -203,4 +174,71 @@ nav p.small.text-muted {
     font-size: 0.95rem;
     font-weight: 500;
     margin-bottom: 0;
+}
+
+/* =========================================
+   6. RESPONSIVENESS (Tablet & Mobile)
+   ========================================= */
+
+/* TABLETS (Under 992px) */
+@media (max-width: 991px) {
+    .ordinance-title {
+        line-height: 1.6;
+        font-size: 1.3rem;
+        /* Scale down long titles slightly */
+    }
+}
+
+/* PHONES (Under 768px) */
+@media (max-width: 767px) {
+    .ordinance-section {
+        padding: 40px 0;
+        /* Reclaim empty vertical space */
+    }
+
+    /* Scale down the watermark so it fits within narrow phone screens */
+    .ordinance-watermark-wrapper::before {
+        max-width: 250px;
+    }
+
+    /* CRITICAL FIX: Kill the justified text on mobile! */
+    .ordinance-title,
+    .ordinance-body {
+        text-align: left;
+    }
+
+    .ordinance-title {
+        font-size: 1.15rem;
+        line-height: 1.5;
+    }
+
+    .ordinance-body {
+        font-size: 0.9rem;
+        /* Slightly smaller for easier phone reading */
+    }
+
+    .committee-header {
+        font-size: 1rem;
+    }
+
+    /* Adjust Pagination for smaller screens */
+    .pagination {
+        gap: 5px;
+        /* Bring buttons closer together */
+    }
+
+    .page-item .page-link {
+        padding: 8px 14px;
+        /* Shrink button size */
+        font-size: 0.9rem;
+    }
+}
+
+/* VERY SMALL PHONES (Under 480px) */
+@media (max-width: 479px) {
+    .page-item .page-link {
+        padding: 6px 10px;
+        /* Squeeze pagination tighter for very small screens like iPhone SE */
+        font-size: 0.85rem;
+    }
 }

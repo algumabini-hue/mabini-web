@@ -1,7 +1,7 @@
 /* Main container for the 2x2 grid with a background watermark */
 .event-grid-container {
     background-size: 40%;
-    padding:  0;
+    padding: 0;
 }
 
 /* =========================================
@@ -27,6 +27,7 @@
     /* Scaled down slightly to fit the new bordered box perfectly */
     height: 100%;
     background-image: url('/images/');
+    /* Ensure your actual URL is here */
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -105,6 +106,7 @@
     min-height: 80vh;
     /* Ensures the white box stretches nicely */
 }
+
 /* --- Updated Path (Breadcrumb) --- */
 .custom-path {
     font-family: 'Courier New', Courier, monospace;
@@ -154,13 +156,12 @@
     width: 60px;
 }
 
-/* Description Images (Based on your .event-img but larger for this view) */
+/* Description Images */
 .desc-img {
     height: 400px;
     /* Adjusted to your original request */
     object-fit: cover;
     filter: grayscale(5%) brightness(1.02);
-    /* Slightly less filtered than the thumbnails */
     display: block;
     transition: transform 0.4s ease;
 }
@@ -184,28 +185,23 @@
 /* --- Custom Lightbox Close Button --- */
 .lightbox-close-btn {
     position: fixed;
-    /* Keeps it pinned to the screen */
     top: 25px;
     right: 30px;
     background: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent dark background */
     color: #ffffff;
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     width: 50px;
     height: 50px;
     font-size: 20px;
-    /* Adjusts icon size */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1060;
-    /* Ensures it sits above EVERYTHING else */
     transition: all 0.3s ease;
 }
 
-/* Red hover effect so users instantly know it closes the window */
 .lightbox-close-btn:hover {
     background-color: #e74c3c;
     border-color: #e74c3c;
@@ -214,7 +210,6 @@
 }
 
 /* --- Admin Upload Page Styles --- */
-
 .upload-card {
     max-width: 600px;
     margin: 50px auto;
@@ -286,4 +281,99 @@
 
 .delete-btn:hover {
     background: #cc0000;
+}
+
+
+/* =========================================
+   RESPONSIVENESS (Tablet & Mobile)
+   ========================================= */
+
+/* TABLETS (Under 992px) */
+@media (max-width: 991px) {
+    .event-img {
+        height: 240px;
+        /* Slightly shorter for medium screens */
+    }
+
+    .desc-img {
+        height: 300px;
+        /* Shrink the large description images */
+    }
+
+    .upload-card {
+        margin: 30px auto;
+        padding: 30px;
+    }
+}
+
+/* PHONES (Under 768px) */
+@media (max-width: 767px) {
+    .event-grid-container {
+        background-size: 60%;
+        /* Bump up watermark size slightly so it isn't tiny */
+    }
+
+    .event-img {
+        height: auto;
+        /* Let the image dictate its own height based on width */
+        aspect-ratio: 16 / 9;
+        /* Keeps the cinematic crop */
+    }
+
+    .desc-img {
+        height: auto;
+        max-height: 250px;
+        /* Prevents the image from taking up the entire mobile screen */
+        aspect-ratio: 16 / 9;
+    }
+
+    .desc-white-box {
+        min-height: auto;
+        /* Allow box to naturally hug the text on mobile */
+    }
+
+    /* Shrink Typography for smaller screens */
+    .custom-path {
+        font-size: 0.95rem;
+    }
+
+    .desc-date {
+        font-size: 1.05rem;
+    }
+
+    .desc-caption {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Adjust the Lightbox close button so it doesn't overlap phone status bars */
+    .lightbox-close-btn {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .upload-card {
+        margin: 15px auto;
+        padding: 20px;
+    }
+}
+
+/* VERY SMALL PHONES (Under 480px) */
+@media (max-width: 479px) {
+    .event-overlay {
+        padding: 15px;
+        /* Give the text a bit more breathing room on tiny cards */
+    }
+
+    .custom-path {
+        font-size: 0.85rem;
+    }
+
+    .event-title,
+    .event-date {
+        font-size: 0.9rem;
+    }
 }

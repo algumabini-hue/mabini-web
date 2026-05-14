@@ -72,30 +72,56 @@
             @endif
 
             {{-- COUNCILORS (Loops through 1 to 8) --}}
-            <div class="row justify-content-center g-5 scroll-fade-in">
-                @for ($i = 1; $i <= 8; $i++)
-                    @php 
-                        $key = 'councilor_' . $i; 
-                        $key = 'skf';
-                        $key = 'abc';
-                        $key = 'sbsec';
-                    @endphp
+            {{-- ========================================== --}}
+            {{-- SKF, ABC, AND SB SECRETARY ROW             --}}
+            {{-- ========================================== --}}
+            <div class="row justify-content-center g-5 mt-2 scroll-fade-in">
+                
+                {{-- SK FEDERATION PRESIDENT --}}
+                @if(isset($officials['skf']) && $officials['skf']->name)
+                <div class="col-12 col-md-4 text-center scroll-fade-in">
+                    <a href="{{ route('officials.officials-personal', $officials['skf']->id) }}" class="profile-link">
+                        <div class="profile-img-container">
+                            <img src="{{ $officials['skf']->photo_path ? asset($officials['skf']->photo_path) : asset('images/default-avatar.png') }}" 
+                                 alt="{{ $officials['skf']->name }}" 
+                                 class="profile-img mx-auto" style="object-fit: cover;">
+                        </div>
+                        <h3 class="profile-name mt-3 text-uppercase">HON. {{ $officials['skf']->name }}</h3>
+                        <p class="profile-position text-uppercase">{{ $officials['skf']->position ?? 'SKF PRESIDENT' }}</p>
+                    </a>
+                </div>
+                @endif
 
-                    @if(isset($officials[$key]) && $officials[$key]->name)
-                    <div class="col-12 col-md-5 text-center scroll-fade-in">
-                        <a href="{{ route('officials.officials-personal', $officials[$key]->id) }}" class="profile-link">
-                            <div class="profile-img-container">
-                                <img src="{{ $officials[$key]->photo_path ? asset($officials[$key]->photo_path) : asset('images/default-avatar.png') }}" 
-                                     alt="{{ $officials[$key]->name }}" 
-                                     class="profile-img mx-auto" style="object-fit: cover;">
-                            </div>
-                            <h3 class="profile-name mt-3 text-uppercase">HON. {{ $officials[$key]->name }}</h3>
-                            {{-- Forced static COUNCILOR text as requested --}}
-                            <p class="profile-position text-uppercase">COUNCILOR</p>
-                        </a>
-                    </div>
-                    @endif
-                @endfor
+                {{-- ABC PRESIDENT --}}
+                @if(isset($officials['abc']) && $officials['abc']->name)
+                <div class="col-12 col-md-4 text-center scroll-fade-in">
+                    <a href="{{ route('officials.officials-personal', $officials['abc']->id) }}" class="profile-link">
+                        <div class="profile-img-container">
+                            <img src="{{ $officials['abc']->photo_path ? asset($officials['abc']->photo_path) : asset('images/default-avatar.png') }}" 
+                                 alt="{{ $officials['abc']->name }}" 
+                                 class="profile-img mx-auto" style="object-fit: cover;">
+                        </div>
+                        <h3 class="profile-name mt-3 text-uppercase">HON. {{ $officials['abc']->name }}</h3>
+                        <p class="profile-position text-uppercase">{{ $officials['abc']->position ?? 'ABC PRESIDENT' }}</p>
+                    </a>
+                </div>
+                @endif
+
+                {{-- SB SECRETARY --}}
+                @if(isset($officials['sbsec']) && $officials['sbsec']->name)
+                <div class="col-12 col-md-4 text-center scroll-fade-in">
+                    <a href="{{ route('officials.officials-personal', $officials['sbsec']->id) }}" class="profile-link">
+                        <div class="profile-img-container">
+                            <img src="{{ $officials['sbsec']->photo_path ? asset($officials['sbsec']->photo_path) : asset('images/default-avatar.png') }}" 
+                                 alt="{{ $officials['sbsec']->name }}" 
+                                 class="profile-img mx-auto" style="object-fit: cover;">
+                        </div>
+                        <h3 class="profile-name mt-3 text-uppercase">{{ $officials['sbsec']->name }}</h3>
+                        <p class="profile-position text-uppercase">{{ $officials['sbsec']->position ?? 'SB SECRETARY' }}</p>
+                    </a>
+                </div>
+                @endif
+
             </div>
 
         </div> {{-- End Z-1 Wrapper --}}

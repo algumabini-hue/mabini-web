@@ -76,6 +76,9 @@
                 @for ($i = 1; $i <= 8; $i++)
                     @php 
                         $key = 'councilor_' . $i; 
+                        $key = 'skf';
+                        $key = 'abc';
+                        $key = 'sbsec';
                     @endphp
 
                     @if(isset($officials[$key]) && $officials[$key]->name)

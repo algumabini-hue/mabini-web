@@ -1,4 +1,4 @@
-<div class="container event-grid-container scroll-fade-in mb-5 mt-5">
+<div class="container  scroll-fade-in mb-5 mt-5">
 
     {{-- HEADER ROW: Heading on Left, Button on Right --}}
     <div class="row align-items-center mb-4">

@@ -84,10 +84,10 @@
                 <a class="nav-link text-dark navigation" href="{{ route('municipality.uploaded') }}" data-uid="true"><strong>EVENT ALBUMS</strong></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark navigation" href="{{ route('ordinances') }}" data-uid="true"><strong>ORDINANCES</strong></a>
+                <a class="nav-link text-dark navigation" href="{{ route('ordinance') }}" data-uid="true"><strong>ORDINANCES</strong></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark navigation" href="{{ route('officials') }}" data-uid="true"><strong>OFFICIALS</strong></a>
+                <a class="nav-link text-dark navigation" href="{{ route('official') }}" data-uid="true"><strong>OFFICIALS</strong></a>
             </li>
             <li class="nav-item">
                 <form method="POST" action="{{ route('logout') }}" class="d-inline">

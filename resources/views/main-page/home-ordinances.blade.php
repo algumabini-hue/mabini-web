@@ -4,14 +4,14 @@
     <div class="row align-items-center mb-4">
 
         {{-- LEFT COLUMN: The Heading --}}
-        <div class="col-12 col-md-6 text-center text-md-start">
+        <div class="col-12 col-md-6 text-center text-md-start mb-3 mb-md-0">
             <h3 class="modern-accent-heading mb-0">Latest Ordinances</h3>
         </div>
 
         {{-- RIGHT COLUMN: The Button --}}
-        <div class="col-12 col-md-6 text-center text-md-end mt-3 mt-md-0 scroll-fade-in">
-            <a class="btn btn-theme-dark px-5 py-2 shadow-sm rounded-pill fw-bold text-uppercase"
-                style="letter-spacing: 1px;" href="{{ route('ordinances') }}">
+        <div class="col-12 col-md-6 text-center text-md-end scroll-fade-in">
+            <a class="btn btn-theme-dark px-4 py-2 shadow-sm rounded-pill fw-bold text-uppercase"
+                style="letter-spacing: 1px; font-size: 0.9rem;" href="{{ route('ordinances') }}">
                 <i class="fas fa-file-contract pe-2"></i> View All
             </a>
         </div>

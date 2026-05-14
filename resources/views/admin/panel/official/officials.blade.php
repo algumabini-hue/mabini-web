@@ -16,7 +16,7 @@
                 class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-4 mb-sm-5 border-bottom pb-3 border-2 border-primary">
             </div>
 
-            {{-- The Org Chart Grid --}}
+            {{-- The Org Chart Grid SK FEDERATION PRES. , ABC PRES, SB SEC--}}
             @php
     $positions = [
         'mayor' => 'Municipal Mayor',
@@ -29,6 +29,9 @@
         'councilor_6' => 'Councilor 6',
         'councilor_7' => 'Councilor 7',
         'councilor_8' => 'Councilor 8',
+        'skf' => 'SKF President',
+        'abc' => 'ABC President',
+        'sbsec' => 'SB Secretary',
     ];
             @endphp
 

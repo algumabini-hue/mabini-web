@@ -87,7 +87,7 @@
                     <div id="image-preview-container" class="row g-3 mt-4 justify-content-center"></div>
                 </div>
 
-                <button type="submit" id="submitBtn" class="btn btn-dark w-100 py-3 fw-bold mt-3"
+                <button type="submit" id="submitBtn" data-uid="true" class="btn btn-dark w-100 py-3 fw-bold mt-3"
                     style="letter-spacing: 2px;">{{ isset($editingEvent) ? 'UPDATE EVENT' : 'POST EVENT' }}</button>
             </form>
         </div>

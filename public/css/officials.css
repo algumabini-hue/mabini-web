@@ -391,42 +391,40 @@
         font-size: 0.95rem;
     }
 
-    /* --- CRITICAL FIX: MAIN BANNER IMAGE & FRAME --- */
+    /* MAIN BANNER IMAGE & FRAME */
     .css-vintage-border-container {
         padding: 10px;
-        /* Slightly thinner frame on mobile so the image has more room */
     }
 
     .officials-img {
         min-height: auto !important;
-        /* Kills the portrait stretch */
         height: auto !important;
         aspect-ratio: 4 / 3;
-        /* Forces a perfect landscape rectangle */
         border-radius: 8px;
-        /* Slightly softer inner corner for mobile */
     }
 
     .officials-img-wrapper::after {
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* Scaling text to fit inside the new landscape frame */
+    /* --- CRITICAL FIX: OVERRIDING INLINE STYLES FOR THE TEXT --- */
     .officials-text-left {
-        bottom: 15px;
-        /* Tighter to the bottom edge */
-        left: 15px;
-        /* Tighter to the left edge */
+        bottom: 15px !important;
+        /* !important overrides the HTML inline style */
+        left: 15px !important;
+        right: 90px !important;
+        /* Forces a safe zone on the right side so text MUST wrap before hitting the logo */
     }
 
     .officials-text-left h2 {
-        font-size: 1.3rem;
-        /* Scaled down significantly so it fits the narrow width */
+        font-size: 1.2rem !important;
         letter-spacing: 0.5px;
+        line-height: 1.2 !important;
+        /* Keeps the lines cleanly stacked when they wrap */
     }
 
     .officials-text-left p {
-        font-size: 0.85rem;
+        font-size: 0.85rem !important;
     }
 
     .officials-curve-right {
@@ -437,7 +435,6 @@
     /* Scaling logo to fit inside the new landscape frame */
     .officials-seal-framed {
         width: 70px;
-        /* Shrinks the logo so it doesn't cover faces */
         height: 70px;
         bottom: 10px;
         right: 10px;
@@ -492,12 +489,17 @@
 
 /* VERY SMALL PHONES (Under 480px) */
 @media (max-width: 479px) {
+    .officials-text-left {
+        right: 80px !important;
+        /* Slightly smaller safe zone for tiny screens */
+    }
+
     .officials-text-left h2 {
-        font-size: 1.1rem;
+        font-size: 1.1rem !important;
     }
 
     .officials-text-left p {
-        font-size: 0.75rem;
+        font-size: 0.75rem !important;
     }
 
     .officials-seal-framed {

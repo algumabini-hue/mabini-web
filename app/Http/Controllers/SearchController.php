@@ -24,7 +24,7 @@ class SearchController extends Controller
 
         // FIX: Removed the 'description' search since that column doesn't exist on the Ordinance model!
         $ordinances = Ordinance::where('subject', 'LIKE', "%{$searchTerm}%")
-            ->latest()->get();
+            ->orderBy('date_implemented', 'desc')->get();
 
         $officials = Official::where('name', 'LIKE', "%{$searchTerm}%")
             ->orWhere('position', 'LIKE', "%{$searchTerm}%")

@@ -340,8 +340,6 @@
 
 /* TABLETS (Under 992px) */
 @media (max-width: 991px) {
-
-    /* Banner Adjustments */
     .officials-text-left h2 {
         font-size: 2.2rem;
     }
@@ -350,13 +348,11 @@
         font-size: 1.2rem;
     }
 
-    /* Chart Adjustments */
     .profile-img-container {
         width: 150px;
         height: 150px;
     }
 
-    /* Personal Info Adjustments */
     .personal-info-container {
         padding: 3rem 2rem;
     }
@@ -373,17 +369,14 @@
 /* PHONES (Under 768px) */
 @media (max-width: 767px) {
 
-    /* --- NEW: TOP HEADER LOGO & TEXT FIX --- */
-    /* Shrink the massive logos on mobile so they don't squish the text */
+    /* TOP HEADER LOGO & TEXT FIX */
     .officials-watermark-wrapper img.shrink-0 {
         width: 80px !important;
         height: 80px !important;
     }
 
-    /* Shrink the officials text so it fits between the smaller logos */
     .officials-header {
         padding: 0 10px;
-        /* Gives the text a little breathing room from the logos */
     }
 
     .officials-header .brand-text-sm {
@@ -398,40 +391,56 @@
         font-size: 0.95rem;
     }
 
-    /* --------------------------------------- */
+    /* --- CRITICAL FIX: MAIN BANNER IMAGE & FRAME --- */
+    .css-vintage-border-container {
+        padding: 10px;
+        /* Slightly thinner frame on mobile so the image has more room */
+    }
 
-    /* Header/Banner Image */
     .officials-img {
-        min-height: 350px;
+        min-height: auto !important;
+        /* Kills the portrait stretch */
+        height: auto !important;
+        aspect-ratio: 4 / 3;
+        /* Forces a perfect landscape rectangle */
+        border-radius: 8px;
+        /* Slightly softer inner corner for mobile */
     }
 
     .officials-img-wrapper::after {
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
+    /* Scaling text to fit inside the new landscape frame */
     .officials-text-left {
-        bottom: 20px;
-        left: 20px;
+        bottom: 15px;
+        /* Tighter to the bottom edge */
+        left: 15px;
+        /* Tighter to the left edge */
     }
 
     .officials-text-left h2 {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
+        /* Scaled down significantly so it fits the narrow width */
+        letter-spacing: 0.5px;
     }
 
     .officials-text-left p {
-        font-size: 1rem;
+        font-size: 0.85rem;
     }
 
     .officials-curve-right {
-        width: 150px;
-        height: 100px;
+        width: 100px;
+        height: 70px;
     }
 
+    /* Scaling logo to fit inside the new landscape frame */
     .officials-seal-framed {
-        width: 90px;
-        height: 90px;
-        bottom: 15px;
-        right: 15px;
+        width: 70px;
+        /* Shrinks the logo so it doesn't cover faces */
+        height: 70px;
+        bottom: 10px;
+        right: 10px;
     }
 
     /* Chart Details */
@@ -484,11 +493,16 @@
 /* VERY SMALL PHONES (Under 480px) */
 @media (max-width: 479px) {
     .officials-text-left h2 {
-        font-size: 1.4rem;
+        font-size: 1.1rem;
     }
 
     .officials-text-left p {
-        font-size: 0.9rem;
+        font-size: 0.75rem;
+    }
+
+    .officials-seal-framed {
+        width: 60px;
+        height: 60px;
     }
 
     .profile-header-name {

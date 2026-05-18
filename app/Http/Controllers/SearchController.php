@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use function Symfony\Component\String\u;
-
 use App\Models\Ordinance;
 use App\Models\Official;
 use App\Models\MunicipalityEvent;
@@ -25,8 +22,8 @@ class SearchController extends Controller
             ->orWhere('caption', 'LIKE', "%{$searchTerm}%")
             ->latest()->get();
 
+        // FIX: Removed the 'description' search since that column doesn't exist on the Ordinance model!
         $ordinances = Ordinance::where('subject', 'LIKE', "%{$searchTerm}%")
-            ->orWhere('description', 'LIKE', "%{$searchTerm}%")
             ->latest()->get();
 
         $officials = Official::where('name', 'LIKE', "%{$searchTerm}%")
@@ -77,7 +74,8 @@ class SearchController extends Controller
         } catch (\Exception $e) {
             // Ignore if view not found
         }
-        // 5. Send ALL THREE variables to the results view
+
+        // 5. Send ALL variables to the results view
         return view('layout.search-results', compact('events', 'ordinances', 'officials', 'searchTerm', 'staticPagesFound'));
     }
 }

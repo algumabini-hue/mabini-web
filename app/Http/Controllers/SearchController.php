@@ -35,7 +35,7 @@ class SearchController extends Controller
 
         // --- 1. SEARCH HISTORY PAGE ---
         try {
-            $historyHtml = view('viewer.mun-history')->render();
+            $historyHtml = view('viewer.history')->render();
             $historyText = strip_tags($historyHtml);
             $historyTitle = "History of Mabini";
 
@@ -43,7 +43,7 @@ class SearchController extends Controller
                 $staticPagesFound[] = [
                     'title' => $historyTitle,
                     'description' => 'Learn about the founding, background, and historical details of the Municipality of Mabini.',
-                    'route' => route('mun-history'),
+                    'route' => route('history'),
                     'icon' => 'bi-clock-history'
                 ];
             }

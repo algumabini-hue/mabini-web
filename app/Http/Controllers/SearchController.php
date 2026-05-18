@@ -35,7 +35,7 @@ class SearchController extends Controller
 
         // --- 1. SEARCH HISTORY PAGE ---
         try {
-            $historyHtml = view('viewer.history')->render();
+            $historyHtml = view('viewer.history-content')->render();
             $historyText = strip_tags($historyHtml);
             $historyTitle = "History of Mabini";
 

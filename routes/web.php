@@ -83,10 +83,9 @@ Route::get('/ordinances', function (Request $request) {
     // Add this block for the new standalone search bar:
     if (request()->has('search') && request('search') != '') {
         $searchTerm = request('search');
-        $query->where(function ($q) use ($searchTerm) {
-            $q->where('subject', 'LIKE', '%' . $searchTerm . '%')
-                ->orWhere('description', 'LIKE', '%' . $searchTerm . '%');
-        });
+
+        // FIX: Removed the non-existent 'description' column from the search query!
+        $query->where('subject', 'LIKE', '%' . $searchTerm . '%');
     }
 
     // 4. Get a list of all existing years dynamically for the dropdown

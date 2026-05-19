@@ -3,15 +3,9 @@
    ========================================= */
 :root {
     --theme-dark: #333333;
-    /* Deep charcoal for buttons & overlays */
     --theme-gray: #7F8C8D;
-    /* Medium gray for ribbons & accents */
     --theme-silver: #BDC3C7;
-    /* Light silver for subtle highlights */
     --theme-text: #2C3E50;
-    /* Dark slate for highly readable text */
-
-    /* Premium White Smoke background gradient */
     --theme-bg-gradient: linear-gradient(180deg, #948383 0%, #322a2a 100%);
 }
 
@@ -33,21 +27,17 @@ body {
    2. MUNICIPALITY VIDEO SECTION
    ========================================= */
 .home-video-card {
-    /* Removed the 20px border radius so it sits flush against the screen */
     border-radius: 0;
 }
 
 .card-video {
     width: 100%;
-    /* Set to 100vh to fill the exact height of the viewport */
     height: 100vh;
     object-fit: cover;
-    /* Removed min and max heights to allow 100vh to take full control */
 }
 
 /* BRANDED VIDEO OVERLAY */
 .video-overlay-dark {
-    /* Fades using the new Charcoal Gray */
     background: linear-gradient(to bottom, rgba(51, 51, 51, 0.3) 0%, rgba(51, 51, 51, 0.85) 50%, rgba(51, 51, 51, 0.3) 100%);
     position: absolute;
     width: 100%;
@@ -69,17 +59,14 @@ body {
     z-index: 1;
 }
 
-/* Keeps the text cleanly layered over the grain effect */
 .content-wrapper {
     position: relative;
     z-index: 2;
 }
 
 /* =========================================
-   MISSION/VISION REVEAL ANIMATIONS
+   MISSION/VISION REVEAL ANIMATIONS (Desktop Only)
    ========================================= */
-
-/* The text is hidden and pushed down slightly by default */
 .hidden-content {
     opacity: 0;
     visibility: hidden;
@@ -87,7 +74,6 @@ body {
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* The styling for our left and right arrows */
 .reveal-arrow {
     position: absolute;
     top: 50%;
@@ -108,7 +94,6 @@ body {
     right: 20px;
 }
 
-/* A subtle pulse animation to draw the user's eye to the arrows */
 @keyframes pulse-arrow {
     0% {
         transform: translateY(-50%) scale(1);
@@ -126,9 +111,6 @@ body {
     }
 }
 
-/* --- THE REVEAL TRIGGERS --- */
-
-/* 1. Desktop Hover Reveal (Only applies if device has a hoverable mouse) */
 @media (hover: hover) {
     .home-video-card:hover .hidden-content {
         opacity: 1;
@@ -138,12 +120,10 @@ body {
 
     .home-video-card:hover .reveal-arrow {
         opacity: 0;
-        /* Hides arrows smoothly once text appears */
         visibility: hidden;
     }
 }
 
-/* 2. Mobile Click Reveal (Triggered by the JavaScript function) */
 .home-video-card.content-active .hidden-content {
     opacity: 1;
     visibility: visible;
@@ -155,7 +135,6 @@ body {
     visibility: hidden;
 }
 
-/* OFFICIAL HEADINGS (Mission/Vision) */
 .official-heading {
     color: #ffffff;
     border-bottom: 3px solid var(--theme-silver);
@@ -196,7 +175,6 @@ body {
     font-size: 1.75rem;
     letter-spacing: 0.5px;
     padding-left: 15px;
-    /* This creates the sleek vertical bar */
     border-left: 6px solid var(--theme-dark);
     text-transform: uppercase;
 }
@@ -225,12 +203,10 @@ body {
     .modern-accent-heading {
         font-size: 1.5rem;
         border-left-width: 5px;
-        /* Thins the vertical bar slightly to match smaller text */
     }
 
     .reveal-arrow {
         font-size: 2rem;
-        /* Pushes arrows closer to the edge so they don't overlap the text in the middle */
         left: 10px;
     }
 
@@ -242,9 +218,7 @@ body {
 /* PHONES (Under 768px) */
 @media (max-width: 767px) {
     .card-video {
-        /* Prevents the video from breaking if content is too small */
         min-height: 500px;
-        /* Replaces 100vh with 85svh. "svh" is modern CSS that fixes the iOS bug where the bottom navigation bar covers the bottom 15% of your video! */
         height: 85svh;
     }
 
@@ -255,6 +229,29 @@ body {
     .hide-on-mobile {
         display: none;
     }
+
+    /* --- NEW FIX: DISABLE ANIMATION & FORCE VISIBILITY ON MOBILE --- */
+    .home-video-card .hidden-content {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+    }
+
+    /* Override the inline clamp() font size for the welcome text */
+    .video-overlay-dark h1 {
+        font-size: 1.5rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    /* Shrink the "View History" button */
+    .video-overlay-dark .btn {
+        padding: 10px 30px !important;
+        /* Overrides the .px-5 class */
+        font-size: 1rem !important;
+        /* Overrides the .btn-lg class */
+    }
+
+    /* -------------------------------------------------------------- */
 
     .modern-accent-heading {
         font-size: 1.25rem;
@@ -268,14 +265,7 @@ body {
 
     .reveal-arrow {
         font-size: 1.5rem;
-        /* Shrinks arrows so they don't dominate the small screen */
         opacity: 0.7;
-        /* Makes them slightly more visible on mobile by default */
-    }
-
-    .hidden-content {
-        /* Reduces the vertical travel distance of the animation so it doesn't jump as jarringly on small screens */
-        transform: translateY(15px);
     }
 }
 
@@ -284,6 +274,16 @@ body {
     .card-video {
         height: 80svh;
         min-height: 450px;
+    }
+
+    /* Shrink text and button even further for tiny screens */
+    .video-overlay-dark h1 {
+        font-size: 1.25rem !important;
+    }
+
+    .video-overlay-dark .btn {
+        padding: 8px 20px !important;
+        font-size: 0.9rem !important;
     }
 
     .modern-accent-heading {

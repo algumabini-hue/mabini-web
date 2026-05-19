@@ -210,24 +210,39 @@ nav p.small.text-muted {
         padding: 0 10px;
     }
 
-    /* --- NEW FIX FOR STRETCHED SCANNED DOCUMENTS --- */
-    /* Overrides the inline min-height:600px so the white box shrinks to hug the image perfectly */
+    /* --- NEW FIX FOR MOBILE SEARCH BAR --- */
+    #ajax-search-form .form-control {
+        font-size: 0.85rem !important;
+        /* Shrink placeholder text slightly */
+        padding-left: 15px !important;
+        /* Reduce inner padding to give text more room */
+    }
+
+    #ajax-search-form .btn {
+        padding-left: 15px !important;
+        /* Overrides the massive px-4 bootstrap class */
+        padding-right: 15px !important;
+        font-size: 0.85rem !important;
+        /* Matches input font size */
+        letter-spacing: 0 !important;
+        /* Kills the wide inline letter spacing */
+    }
+
+    /* ------------------------------------- */
+
+    /* STRETCHED SCANNED DOCUMENTS FIX */
     .document-page.lightbox-trigger {
         min-height: auto !important;
         height: auto !important;
     }
 
-    /* Overrides the Bootstrap h-100 class so the image naturally scales its height */
     .document-page.lightbox-trigger img {
         height: auto !important;
     }
 
-    /* Bonus: Shrinks the PDF viewer on mobile so it doesn't take 1100px of scrolling */
     .document-page:not(.lightbox-trigger) {
         height: 500px !important;
     }
-
-    /* ----------------------------------------------- */
 
     /* Typography Overrides */
     .ordinance-title,
@@ -260,5 +275,16 @@ nav p.small.text-muted {
     .page-item .page-link {
         padding: 6px 10px;
         font-size: 0.85rem;
+    }
+
+    /* Shrink the search bar even more for tiny phones (e.g., iPhone SE) */
+    #ajax-search-form .form-control {
+        font-size: 0.75rem !important;
+    }
+
+    #ajax-search-form .btn {
+        font-size: 0.75rem !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 }

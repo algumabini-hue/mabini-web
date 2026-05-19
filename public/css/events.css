@@ -313,6 +313,26 @@
         /* Bump up watermark size slightly so it isn't tiny */
     }
 
+    /* --- NEW FIX FOR MOBILE SEARCH BAR --- */
+    #ajax-search-form .form-control {
+        font-size: 0.85rem !important;
+        /* Shrink placeholder text slightly */
+        padding-left: 15px !important;
+        /* Reduce inner padding to give text more room */
+    }
+
+    #ajax-search-form .btn {
+        padding-left: 15px !important;
+        /* Overrides the massive px-4 bootstrap class */
+        padding-right: 15px !important;
+        font-size: 0.85rem !important;
+        /* Matches input font size */
+        letter-spacing: 0 !important;
+        /* Kills the wide inline letter spacing */
+    }
+
+    /* ------------------------------------- */
+
     .event-img {
         height: auto;
         /* Let the image dictate its own height based on width */
@@ -366,6 +386,17 @@
     .event-overlay {
         padding: 15px;
         /* Give the text a bit more breathing room on tiny cards */
+    }
+
+    /* Shrink the search bar even more for tiny phones (e.g., iPhone SE) */
+    #ajax-search-form .form-control {
+        font-size: 0.75rem !important;
+    }
+
+    #ajax-search-form .btn {
+        font-size: 0.75rem !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 
     .custom-path {

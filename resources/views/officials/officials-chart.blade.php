@@ -72,6 +72,28 @@
             @endif
 
             {{-- COUNCILORS (Loops through 1 to 8) --}}
+            {{-- COUNCILORS (Loops through 1 to 8) --}}
+            <div class="row justify-content-center g-5 mb-5 scroll-fade-in">
+                @for ($i = 1; $i <= 8; $i++)
+                    @php 
+                        $key = 'councilor_' . $i; 
+                    @endphp
+
+                    @if(isset($officials[$key]) && $officials[$key]->name)
+                    <div class="col-12 col-md-4 col-lg-3 text-center scroll-fade-in">
+                        <a href="{{ route('officials.officials-personal', $officials[$key]->id) }}" class="profile-link">
+                            <div class="profile-img-container">
+                                <img src="{{ $officials[$key]->photo_path ? asset($officials[$key]->photo_path) : asset('images/default-avatar.png') }}" 
+                                     alt="{{ $officials[$key]->name }}" 
+                                     class="profile-img mx-auto" style="object-fit: cover;">
+                            </div>
+                            <h3 class="profile-name mt-3 text-uppercase">HON. {{ $officials[$key]->name }}</h3>
+                            <p class="profile-position text-uppercase">COUNCILOR</p>
+                        </a>
+                    </div>
+                    @endif
+                @endfor
+            </div>
             {{-- ========================================== --}}
             {{-- SKF, ABC, AND SB SECRETARY ROW             --}}
             {{-- ========================================== --}}
